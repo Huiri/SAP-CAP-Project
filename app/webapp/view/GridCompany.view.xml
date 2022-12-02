@@ -1,0 +1,167 @@
+<mvc:View controllerName="project1.controller.GridCompany"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:t="sap.ui.table"
+    xmlns:u="sap.ui.unified"
+	xmlns:c="sap.ui.core"
+	xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    height="100%">
+    <f:DynamicPage id="_IDGenPage1"
+
+		class="sapUiContentPadding">
+        <f:title>
+            <f:DynamicPageTitle id="_IDGenDynamicPageTitle1" >
+                <f:content>
+                    <HBox id="_IDGenHBox1">
+                        <mvc:XMLView id="_IDGenXMLView1" viewName="project1.view.NestedView.CompanyHeader"/>
+                    </HBox>
+
+                </f:content>
+            </f:DynamicPageTitle>
+        </f:title>
+		<f:content>
+			<t:Table id="ui_table"
+				rows="{Vendor>/Company}"
+				selectionMode="MultiToggle"
+                visibleRowCount="3"
+				paste="onPaste"
+				ariaLabelledBy="title">
+				<t:extension> 
+                    <OverflowToolbar id="_IDGenOverflowToolbar1" >
+                    <!-- 왼쪽부터 자식 요소가 생성됨 -->
+                        <Title id="TableName" text="협력 업체 목록"/>
+                        <ToolbarSpacer id="_IDGenToolbarSpacer1"/><!-- 우측에 요소를 정렬하고 싶을 때 사용 -->
+                        <!-- 버튼 클릭 시 물품 요청 생성 페이지로 이동 -->
+                        <Button 
+                            id="_IDGenButton7"
+                            text="반응형 테이블"
+                            press=".toResponsiveTable"
+                            type="Transparent"/>
+                            <Button 
+                            id="_IDGenButton8"
+                            text="협력 업체 추가"
+                            press=".onCreateVendor"
+                            type="Transparent"/>
+                        <!-- 버튼 클릭 시 정렬 조건 설정 가능한 dialog 창 띄우는 함수 실행 -->
+                        <Button id="_IDGenButton6"
+                            icon="sap-icon://sort"
+                            tooltip="정렬"
+                            press=".onSort" 
+                            type="Transparent"/>
+                            <!-- press : 버튼 눌렀을 때 어떤 함수를 호출할 지 -->
+                            <!-- tooltip : 버튼에 마우스 hover 시 표시해줄 값 선언, 버튼 용도 설명용  -->
+                    </OverflowToolbar>
+                </t:extension>
+				<t:columns>
+                	
+					<t:Column filterProperty="ComNum"
+                        sortProperty="ComNum"
+                        id="_IDGenColumn1" hAlign="Center">
+						<Label id="_IDGenLabel1" text="업체 코드" textAlign="Center" />
+						<t:template>
+							<Text id="_IDGenText1" text="{Vendor>comcode}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<t:Column filterProperty="ComName"
+                        sortProperty="ComName"
+                        id="_IDGenColumn2" hAlign="Center">
+						<Label id="_IDGenLabel2" text="업체명" textAlign="Center"/>
+						<t:template>
+							<Text id="_IDGenText2" text="{Vendor>comname}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					
+                    <t:Column id="_IDGenColumn3"
+						filterProperty="ComAddress"
+                        sortProperty="ComAddress"
+                        hAlign="Center"
+						headerSpan="3,1">
+						<t:multiLabels>
+                            <Label id="_IDGenLabel17"  text="업체 기본 정보" width="100%"/>
+
+							<Label id="_IDGenLabel18" text="주소" textAlign="Center" width="100%"/>
+						</t:multiLabels>
+						<t:template>
+							<Text id="_IDGenText3" text="{Vendor>comaddress}"/>
+						</t:template>
+					</t:Column>
+                    <t:Column id="_IDGenColumn4"
+						filterProperty="ComPerson"
+                        sortProperty="ComPerson"
+                        hAlign="Center"
+						headerSpan="3,1">
+						<t:multiLabels>
+                            <Label id="_IDGenLabel11" text="업체 기본 정보" width="100%"/>
+
+							<Label id="_IDGenLabel14" text="담당자" textAlign="Center" width="100%"/>
+						</t:multiLabels>
+						<t:template>
+                            <Text id="_IDGenText4" text="{Vendor>comperson}" />
+						</t:template>
+					</t:Column>
+                    <t:Column id="_IDGenColumn5"
+						
+                        hAlign="Center"
+						headerSpan="2,1"
+                        filterProperty="ComContact"
+                        sortProperty="ComContact">
+						<t:multiLabels>
+                            <Label id="_IDGenLabel9" text="업체 기본 정보" width="100%"/>
+							<Label id="_IDGenLabel10" text="담당자 연락처" textAlign="Center" width="100%"/>
+						</t:multiLabels>
+						<t:template>
+                            <Text id="_IDGenText5" text="{Vendor>comcontact}" />
+						</t:template>
+					</t:Column>
+                    <t:Column id="_IDGenColumn6"
+						filterProperty="Good"
+                        sortProperty="Good"
+                        hAlign="Center"
+						headerSpan="2,1">
+						<t:multiLabels>
+                            <Label id="_IDGenLabel12" text="업체 설명"  width="100%"/>
+						    <Label id="_IDGenLabel6" text="거래 품목" textAlign="Center"/>
+						</t:multiLabels>
+						<t:template>
+							<Text id="_IDGenText6" text="{Vendor>comgood}"   />
+						</t:template>
+					</t:Column>
+					<t:Column id="_IDGenColumn7"
+						filterProperty="Date"
+                        sortProperty="Date"
+                        hAlign="Center"
+						headerSpan="3,1">
+						<t:multiLabels>
+                            <Label id="_IDGenLabel13" text="업체 설명" width="100%"/>
+						    <Label id="_IDGenLabel7" text="업체 등록일" textAlign="Center"/>
+						</t:multiLabels>
+						<t:template>
+							<Text id="_IDGenText7" text="{Vendor>comdate}" wrapping="false"/>
+						</t:template>
+					</t:Column>
+					
+					<t:Column id="_IDGenColumn8" hAlign="Center">
+						<Label id="_IDGenLabel8" text="신용 상태" textAlign="Center" />
+						<t:template>
+							 <ObjectStatus 
+                                id="_IDGenObjectStatus1"
+                                active="true"
+                                press="alert(&#36;{$source>/text} + ' pressed')"
+                                text="{
+                                    
+                                    path:'Vendor>comstate',
+                                    formatter:'.formatter.creditStatus'
+                                    }"
+                                state = "{=${Vendor>comstate} === 'trust' ? 'Success' : ${Vendor>comstate}  === 'caution' ? 'None' : 'Error'}"/>
+						</t:template>
+					</t:Column>
+					
+					
+				</t:columns>
+			</t:Table>
+		</f:content>
+	</f:DynamicPage>
+    
+</mvc:View>

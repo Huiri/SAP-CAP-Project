@@ -1,0 +1,22 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+        id="SortDialog"
+        confirm="onConfirmSortDialog"
+        title="협력 업체 정렬">
+        <!-- //Dialog 화면에 사용할 함수 및 제목 선언
+        //confirm, 즉 확인 버튼 누를 시 실행할 함수 선언 -->
+         <sortItems><!--//정렬할 항목들 선언 -->
+            <ViewSettingsItem id="_IDGenViewSettingsItem1" text="부품 카테고리" key="category" selected="true"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem2" text="부품 코드" key="code"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem3" text="부품 명" key="name"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem4" text="단위" key="unit"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem5" text="부품 단가" key="cost"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem6" text="부품 생산 여부" key="produce"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem7" text="등록 일자" key="date"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem8" text="비고" key="etc"/>
+        </sortItems>
+        
+    </ViewSettingsDialog>
+</core:FragmentDefinition>

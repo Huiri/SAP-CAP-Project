@@ -1,0 +1,113 @@
+<mvc:View
+	controllerName="project1.controller.ResponsiveCompany"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns:c="sap.ui.core"
+	xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    height="100%"
+	xmlns="sap.m">
+	<f:DynamicPage id="_IDGenPage1"
+		toggleHeaderOnTitleClick="true"
+		class="sapUiContentPadding">
+        <f:title>
+            <f:DynamicPageTitle id="_IDGenDynamicPageTitle1" >
+                <f:content>
+                    <HBox id="_IDGenHBox1">
+                        <mvc:XMLView id="_IDGenXMLView1" viewName="project1.view.NestedView.CompanyHeader"/>
+                    </HBox>
+
+                </f:content>
+            </f:DynamicPageTitle>
+        </f:title>
+		<f:content>
+			<Table
+				width = "100%"
+				id="ui_table"
+				inset="false"
+				items="{
+					path: 'Vendor>/Company',
+					sorter: {
+						path: 'Vendor>comcode'
+					}
+				}">
+				<headerToolbar>
+					<OverflowToolbar id="_IDGenOverflowToolbar1">
+						<content>
+							<Title id="_IDGenTitle1" text="협력 업체 목록" level="H2"/>
+							<ToolbarSpacer id="_IDGenToolbarSpacer1" />
+							
+							<Button id="_IDGenButton1" text="그리드 테이블" press=".toGridTable"
+									type="Transparent"/>
+							<!-- 버튼 클릭 시 정렬 조건 설정 가능한 dialog 창 띄우는 함수 실행 -->
+							<Button id="_IDGenButton6"
+								icon="sap-icon://sort"
+								tooltip="정렬"
+								press=".onSort" 
+								type="Transparent"/>
+								<!-- press : 버튼 눌렀을 때 어떤 함수를 호출할 지 -->
+								<!-- tooltip : 버튼에 마우스 hover 시 표시해줄 값 선언, 버튼 용도 설명용  -->
+						</content>
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column id="_IDGenColumn1">
+						<Text id="_IDGenText1" text="업체 코드" />
+					</Column>
+					<Column id="_IDGenColumn2">
+						<Text id="_IDGenText2" text="업체명" />
+					</Column>
+					<Column id="_IDGenColumn3" hAlign="End">
+						<Text id="_IDGenText3" text="주소" textAlign="End"/>
+					</Column>
+					<Column id="_IDGenColumn4">
+						<Text id="_IDGenText4" text="담당자" />
+					</Column>
+					<Column id="_IDGenColumn5" hAlign="Center">
+						<Text id="_IDGenText5" text="담당자 연락처" textAlign="Center"/>
+					</Column>
+					<Column id="_IDGenColumn6" hAlign="End">
+						<Text id="_IDGenText6" text="거래품목" />
+					</Column>
+					<Column id="_IDGenColumn7" hAlign="Center">
+						<Text id="_IDGenText7" text="업체 등록일" />
+					</Column>
+					<Column id="_IDGenColumn8" hAlign="End">
+						<Text id="_IDGenText8" text="신용 상태" />
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem id="_IDGenColumnListItem1" vAlign="Middle">
+						<cells>
+							<Text id="_IDGenText9"
+								text="{Vendor>comcode}" />
+							<Text id="_IDGenText10"
+								text="{Vendor>comname}" />
+							<Text id="_IDGenText11"
+								text="{Vendor>comaddress}" />
+							<Text id="_IDGenText12"
+								text="{Vendor>comperson}" />
+							<Text id="_IDGenText13"
+								text="{Vendor>comcontact}" />
+							<Text id="_IDGenText14"
+								text="{Vendor>comgood}" />
+							<Text id="_IDGenText15"
+								text="{Vendor>comdate}" />
+							<ObjectStatus 
+								id="_IDGenObjectStatus1"
+								active="true"
+								press="alert(&#36;{$source>/text} + ' pressed')"
+								text="{
+									
+									path:'Vendor>comstate',
+									formatter:'.formatter.creditStatus'
+									}"
+								state = "{=${Vendor>comstate} === 'trust' ? 'Success' : ${Vendor>comstate}  === 'caution' ? 'None' : 'Error'}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

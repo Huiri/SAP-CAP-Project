@@ -1,0 +1,289 @@
+{
+  "_version": "1.42.0",
+  "sap.app": {
+    "id": "project1",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.8.1",
+      "toolsId": "d1a40033-ed7a-4cb8-b161-66f0a52632fc"
+    },
+    "dataSources": {
+      "requestService": {
+        "uri": "/request/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "companyService": {
+        "uri": "/company/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
+      
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.102.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "project1.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService2",
+        "preload": true,
+        "settings": {}
+      },
+      "Request" : {
+        "dataSource": "requestService",
+        "preload": true,
+        "settings": {
+          "operationMode" : "Server",
+          "earlyRequests" : true,
+          "synchronizationMode" : "None",
+          "autoExpandSelect" : true
+        }
+      },
+      "Vendor" : {
+        "dataSource": "companyService",
+        "preload": true,
+        "settings": {
+          "operationMode" : "Server",
+          "earlyRequests" : true,
+          "synchronizationMode" : "None",
+          "autoExpandSelect" : true
+        }
+      },
+      "Request2" : {
+        "type" : "sap.ui.model.json.JSONModel",
+        "uri" : "model/RequestOrder.json"
+      },
+      "Vendor2" : {
+        "type" : "sap.ui.model.json.JSONModel",
+        "uri" : "model/VendorMaster.json"
+      },
+      "Material" : {
+        "type" : "sap.ui.model.json.JSONModel",
+        "uri" : "model/MaterialMaster.json"
+      },
+      "SelectOption" : {
+        "type" : "sap.ui.model.json.JSONModel",
+        "uri" : "model/SelectOption.json"
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "project1.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "GridCompany",
+          "pattern": "GridCompany",
+          "target": [
+            "GridCompany"
+          ]
+        },
+        {
+          "name": "ResponsiveCompany",
+          "pattern": "ResponsiveCompany",
+          "target": [
+            "ResponsiveCompany"
+          ]
+        },
+        {
+          "name": "Request",
+          "pattern": "",
+          "target": [
+            "Request"
+          ]
+        },
+        {
+          "name" : "CreateOrder",
+          "pattern": "CreateOrder",
+          "target" : [
+            "CreateOrder"
+          ]
+        },
+        {
+          "name": "Routeapp",
+          "pattern": "Routeapp",
+          "target": [
+            "Targetapp"
+          ]
+        },
+        {
+          "name": "AddCompany",
+          "pattern": "AddCompany",
+          "target": [
+            "AddCompany"
+          ]
+        },
+        {
+          "name": "AddMaterial",
+          "pattern": "AddMaterial",
+          "target": [
+            "AddMaterial"
+          ]
+        },
+        {
+          "name": "GridMaterial",
+          "pattern": "GridMaterial",
+          "target": [
+            "GridMaterial"
+          ]
+        },
+        {
+          "name": "ResponsiveMaterial",
+          "pattern": "ResponsiveMaterial",
+          "target": [
+            "ResponsiveMaterial"
+          ]
+        },
+        {
+          "name": "Practice",
+          "pattern": "Practice",
+          "target": [
+            "Practice"
+          ]
+        }
+        
+        
+      ],
+      "targets": {
+        "ResponsiveMaterial": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "ResponsiveMaterial",
+          "viewName": "ResponsiveMaterial"
+        }, 
+        "GridMaterial": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "GridMaterial",
+          "viewName": "GridMaterial"
+        }, 
+        "GridCompany": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "GridCompany",
+          "viewName": "GridCompany"
+        }, 
+        "ResponsiveCompany": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "ResponsiveCompany",
+          "viewName": "ResponsiveCompany"
+        }, 
+        "Request": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Request",
+          "viewName": "Request"
+        }, 
+        "CreateOrder" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "CreateOrder",
+          "viewName": "CreateOrder"
+        },
+        "Targetapp": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "app",
+          "viewName": "app"
+        },
+        "AddCompany": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "AddCompany",
+          "viewName": "AddCompany"
+        },
+        "AddMaterial": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "AddMaterial",
+          "viewName": "AddMaterial"
+        },
+        "Practice" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "Practice",
+          "viewName": "Practice"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "project1.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}
