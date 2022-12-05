@@ -2,7 +2,7 @@ namespace Huiri_Head.request;
 
 entity Request{
     key request_number              : String @title : '요청번호';  //@title : 컬럼의 용도를 작성해줌 / key는 중복 데이터 불가 
-        request_product             : String  @title : '요청물품';
+        request_product             : String  @title : '요청물품'; // 
         request_quantity            : Integer @title : '요청수량';
         requestor                   : String  @title : '요청자';
         request_date                : String  @title : '요청날짜';

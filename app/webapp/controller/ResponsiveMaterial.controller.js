@@ -147,7 +147,10 @@ sap.ui.define(
             },
             getEventContext : function(e) {
                 
-            }
+            },
+            alert: function(oEvent) {
+			
+            },
         
       });
     }

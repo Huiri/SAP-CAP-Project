@@ -14,18 +14,18 @@
     //   ]
     // }
     {
-      "name" : "Run Huiri_Head",
-      "type" : "node",
-      "request" : "launch",
-      "program" : "${workspaceFolder}/app/node_modules/@sap/approuter/approuter.js",
-      "args" : [],
-      "cwd" : "${workspaceFolder}/app",
-      "env" : {
-        "PORT" : "6004",
-        "MOCK_LOOKUP_DIRS" : "[\"./\"]",
-        "run.config" : "{\"handlerId\":\"ui5_run_config_handler_id\",\"runnabledId\":\"/home/user/projects/Huiri_Head/app\"}"
+      "name": "Run Huiri_Head",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/app/node_modules/@sap/approuter/approuter.js",
+      "args": [],
+      "cwd": "${workspaceFolder}/app",
+      "env": {
+        "PORT": "6004",
+        "MOCK_LOOKUP_DIRS": "[\"./\"]",
+        "run.config": "{\"handlerId\":\"ui5_run_config_handler_id\",\"runnabledId\":\"/home/user/projects/Huiri_Head/app\"}"
       },
-      "envFile" : "${workspaceFolder}/app/default-env.json"
+      "envFile": "${workspaceFolder}/app/default-env.json"
     }
   ]
 }

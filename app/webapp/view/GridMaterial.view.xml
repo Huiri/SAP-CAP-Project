@@ -1,12 +1,8 @@
 <mvc:View controllerName="project1.controller.GridMaterial"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:t="sap.ui.table"
-    xmlns:u="sap.ui.unified"
-	xmlns:c="sap.ui.core"
 	xmlns="sap.m"
     xmlns:f="sap.f"
-    xmlns:layout="sap.ui.layout"
-    xmlns:form="sap.ui.layout.form"
     height="100%">
     <f:DynamicPage id="_IDGenPage1"
 		class="sapUiContentPadding">
@@ -24,9 +20,7 @@
 		<f:content>
 			<t:Table id="ui_table"
                 selectionBehavior="RowOnly"
-
 				rows="{Material>/productList}"
-				paste="onPaste"
 				ariaLabelledBy="title">
 				<t:extension> 
                     <OverflowToolbar id="_IDGenOverflowToolbar1" >

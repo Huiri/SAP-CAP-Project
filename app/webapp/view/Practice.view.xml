@@ -1,5 +1,5 @@
 <mvc:View
- controllerName="project1.controller.AddMaterial"
+ controllerName="project1.controller.Practice"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:f="sap.f"
     xmlns:form="sap.ui.layout.form"
