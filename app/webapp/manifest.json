@@ -208,6 +208,20 @@
           "target": [
             "Practice"
           ]
+        },
+        {
+          "name": "RequestDetail",
+          "pattern": "RequestDetail/{num}/{table}",
+          "target": [
+            "RequestDetail"
+          ]
+        },
+        {
+          "name": "CompanyDetail",
+          "pattern": "CompanyDetail/{num}/{table}",
+          "target": [
+            "CompanyDetail"
+          ]
         }
         
         
@@ -216,66 +230,86 @@
         "ResponsiveMaterial": {
           "viewType": "XML",
           "transition": "slide",
-          "clearControlAggregation": false,
+          "clearControlAggregation": true,
           "viewId": "ResponsiveMaterial",
           "viewName": "ResponsiveMaterial"
         }, 
         "GridMaterial": {
           "viewType": "XML",
           "transition": "slide",
-          "clearControlAggregation": false,
+          "clearControlAggregation": true,
           "viewId": "GridMaterial",
           "viewName": "GridMaterial"
         }, 
         "GridCompany": {
           "viewType": "XML",
           "transition": "slide",
-          "clearControlAggregation": false,
+          "clearControlAggregation": true,
           "viewId": "GridCompany",
           "viewName": "GridCompany"
         }, 
         "ResponsiveCompany": {
           "viewType": "XML",
           "transition": "slide",
+          "clearControlAggregation": true,
           "viewId": "ResponsiveCompany",
           "viewName": "ResponsiveCompany"
         }, 
         "Request": {
           "viewType": "XML",
           "transition": "slide",
-          "clearControlAggregation": false,
+          "clearControlAggregation": true,
           "viewId": "Request",
           "viewName": "Request"
         }, 
         "CreateOrder" : {
           "viewType": "XML",
           "transition": "slide",
+          "clearControlAggregation": true,
           "viewId": "CreateOrder",
           "viewName": "CreateOrder"
         },
         "Targetapp": {
           "viewType": "XML",
           "transition": "slide",
+          "clearControlAggregation": true,
           "viewId": "app",
           "viewName": "app"
         },
         "AddCompany": {
           "viewType": "XML",
           "transition": "slide",
+          "clearControlAggregation": true,
           "viewId": "AddCompany",
           "viewName": "AddCompany"
         },
         "AddMaterial": {
           "viewType": "XML",
           "transition": "slide",
+          "clearControlAggregation": true,
           "viewId": "AddMaterial",
           "viewName": "AddMaterial"
         },
         "Practice" : {
           "viewType": "XML",
           "transition": "slide",
+          "clearControlAggregation": true,
           "viewId": "Practice",
           "viewName": "Practice"
+        },
+        "RequestDetail" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "RequestDetail",
+          "viewName": "RequestDetail"
+        },
+        "CompanyDetail" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "CompanyDetail",
+          "viewName": "CompanyDetail"
         }
       }
     },

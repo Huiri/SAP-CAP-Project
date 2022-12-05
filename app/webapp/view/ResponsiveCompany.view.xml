@@ -1,11 +1,7 @@
 <mvc:View
 	controllerName="project1.controller.ResponsiveCompany"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:u="sap.ui.unified"
-	xmlns:c="sap.ui.core"
 	xmlns:f="sap.f"
-    xmlns:layout="sap.ui.layout"
-    xmlns:form="sap.ui.layout.form"
     height="100%"
 	xmlns="sap.m">
 	<f:DynamicPage id="_IDGenPage1"
@@ -25,6 +21,7 @@
 			<Table
 				width = "100%"
 				id="ui_table"
+
 				inset="false"
 				items="{
 					path: 'Vendor>/Company',
@@ -51,7 +48,7 @@
 						</content>
 					</OverflowToolbar>
 				</headerToolbar>
-				<columns>
+				<columns >
 					<Column id="_IDGenColumn1">
 						<Text id="_IDGenText1" text="업체 코드" />
 					</Column>
@@ -78,7 +75,7 @@
 					</Column>
 				</columns>
 				<items>
-					<ColumnListItem id="_IDGenColumnListItem1" vAlign="Middle">
+					<ColumnListItem id="_IDGenColumnListItem1" vAlign="Middle" type="Navigation" press=".toDetailPage">
 						<cells>
 							<Text id="_IDGenText9"
 								text="{Vendor>comcode}" />
@@ -106,7 +103,16 @@
 								state = "{=${Vendor>comstate} === 'trust' ? 'Success' : ${Vendor>comstate}  === 'caution' ? 'None' : 'Error'}"/>
 						</cells>
 					</ColumnListItem>
+					
 				</items>
+				<!-- <rowActionTemplate>
+                    <RowAction id="_IDGenRowAction1" >
+                        <items>
+                            <RowActionItem id="_IDGenRowActionItem1"  type="Navigation" press="onNavToDetail"></t:RowActionItem>
+                        </items>
+                    </RowAction>
+                </rowActionTemplate> -->
+
 			</Table>
 		</f:content>
 	</f:DynamicPage>

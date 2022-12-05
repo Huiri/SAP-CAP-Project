@@ -139,12 +139,12 @@
         <!-- 실제 content 부분 -->
         <f:content>
             <!-- table 선언 -->
-            <t:Table 
+            <t:Table
+                cellClick=".getRowData"
+                rowActionCount="1" 
                 id="ui_table"
-                selectionMode="MultiToggle"
-                rows="{Request>/Request}" 
+                rows="{RequestModel>/}" 
                 selectionBehavior="RowOnly"
-                rowSelectionChange=".getContext"
                 width="auto">
                 <!-- SelectionMode : 여러 row 선택 가능
                 rows : row에 할당할 데이터 경로 지정
@@ -204,7 +204,7 @@
                         <!-- <Label><Text> sap.m에 존재하기 때문에 namespace:Label || Text 선언 X -->
                         <Label id="_IDGenLabel1" text="요청번호"/>
                         <t:template>
-                            <Text id="_IDGenText1" text="{Request>request_number}"/>
+                            <Text id="_IDGenText1" text="{RequestModel>request_number}"/>
                             <!-- rows로 불러온 값 중에서도 ReqNum 값을 할당 -->
                         </t:template>  
                     </t:Column>
@@ -212,7 +212,7 @@
                     <t:Column id="_IDGenColumn2" hAlign="Center">
                         <Label id="_IDGenLabel2" text="요청물품"/>
                         <t:template>
-                            <Text id="_IDGenText2" text="{Request>request_product}"/>
+                            <Text id="_IDGenText2" text="{RequestModel>request_product}"/>
                             <!-- rows로 불러온 값 중에서도 ReqNReqGoodum 값을 할당 -->
 
                         </t:template>
@@ -221,7 +221,7 @@
                     <t:Column id="_IDGenColumn3" hAlign="Center">
                         <Label id="_IDGenLabel3" text="물품개수"/>
                         <t:template>
-                            <Text id="_IDGenText3" text="{Request>request_quantity}"/>
+                            <Text id="_IDGenText3" text="{RequestModel>request_quantity}"/>
                             <!-- rows로 불러온 값 중에서도 ReqQty 값을 할당 -->
                         </t:template>
                     </t:Column>
@@ -229,7 +229,7 @@
                     <t:Column id="_IDGenColumn4" hAlign="Center">
                         <Label id="_IDGenLabel4" text="요청자"/>
                         <t:template>
-                            <Text id="_IDGenText4" text="{Request>requestor}"/>
+                            <Text id="_IDGenText4" text="{RequestModel>requestor}"/>
                             <!-- rows로 불러온 값 중에서도 Requester 값을 할당 -->
                         </t:template>
                     </t:Column>
@@ -237,7 +237,7 @@
                     <t:Column id="_IDGenColumn5" hAlign="Center">
                         <Label id="_IDGenLabel5" text="요청일자"/>
                         <t:template>
-                            <Text id="_IDGenText5" text="{Request>request_date}"/>
+                            <Text id="_IDGenText5" text="{RequestModel>request_date}"/>
                             <!-- rows로 불러온 값 중에서도 ReqDate 값을 할당 -->
                         </t:template>
                     </t:Column>
@@ -252,10 +252,10 @@
                                 active="true"
                                 press="alert(&#36;{$source>/text} + ' pressed')"
                                 text="{
-                                    path:'Request>request_state',
+                                    path:'RequestModel>request_state',
                                     formatter:'.formatter.statusText'
                                     }"
-                                state = "{=${Request>request_state} === 'A' ? 'Success' : ${Request>request_state}  === 'B' ? 'None' : 'Error'}"/>
+                                state = "{=${RequestModel>request_state} === 'A' ? 'Success' : ${RequestModel>request_state}  === 'B' ? 'None' : 'Error'}"/>
                                 <!-- 값을 하나씩 불러오고 싶을 경우 $를 붙여서 불러옴, $ 붙이지 않을 경우 뭉텅이로 불러와짐 -->
                                 <!--text : formatter를 이용해 실제 데이터 및 값 변경해서 보여줌 -->
                                 <!-- state : 중복 삼항연산자를 이용해  A,B,C값에 따라 색상 변경 -> ObjectStatus태그 활용 -->
@@ -263,6 +263,13 @@
                         </t:template>
                     </t:Column>
                 </t:columns>
+                <t:rowActionTemplate>
+                    <t:RowAction id="_IDGenRowAction1" >
+                        <t:items>
+                            <t:RowActionItem id="_IDGenRowActionItem1"  type="Navigation" press="onNavToDetail"></t:RowActionItem>
+                        </t:items>
+                    </t:RowAction>
+                </t:rowActionTemplate>
 
             </t:Table>
     </f:content>

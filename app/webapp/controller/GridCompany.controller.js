@@ -11,9 +11,29 @@ sap.ui.define(
       return Controller.extend("project1.controller.GridCompany", {
         formatter : formatter,
 
-        onInit() {
+        onInit : async function() {
             that = this;
+            this.getView().byId("ui_table").setBusy(true);
+            const Request =  await $.ajax({
+                type : "get",
+                url : "/company/Company"
+            });
+            this.getView().byId("ui_table").setBusy(false);
+
+            let CompanyModel = new JSONModel(Company.value);
+            this.getView().setModel(CompanyModel, "CompanyModel");
+
+
         },
+        onNavToDetail : function(oEvent) {
+            console.log(oEvent.getParameters());
+            let SelectedNum = oEvent.getParameters().row.mAggregations.cells[0].mProperties.text;
+            console.log(SelectedNum);
+            this.getOwnerComponent().getRouter().navTo("CompanyDetail", {num : SelectedNum, table : "grid"});
+            //, {변수명 : manifest route에 작성한 변수명과 일치시켜야 함}
+
+        },
+
         //검색을 위한 함수
         onSearch : function (aFilter) {
             

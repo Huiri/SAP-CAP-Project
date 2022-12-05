@@ -1,18 +1,46 @@
 sap.ui.define([
     'sap/ui/core/mvc/Controller', "sap/m/MessageToast",
     "../model/formatter", "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator", "sap/ui/model/Sorter", "sap/ui/core/Fragment"
+    "sap/ui/model/FilterOperator", "sap/ui/model/Sorter", "sap/ui/core/Fragment",
+    "sap/ui/model/json/JSONModel",
 ],//사용할 모듈 선언
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, MessageToast, formatter, Filter, FilterOperator, Sorter, Fragment) {//사용할 모듈의 별칭 선언(순서 맞춰 주어야 오류 발생 X)
+    function (Controller,
+	MessageToast,
+	formatter,
+	Filter,
+	FilterOperator,
+	Sorter,
+	Fragment,
+	JSONModel) {//사용할 모듈의 별칭 선언(순서 맞춰 주어야 오류 발생 X)
         "use strict";
 
         return Controller.extend("project1.controller.Request", { // 소괄호 안의 경로 파일을 컨트롤러로 사용하겠다는 선언
             formatter:formatter, //뷰에서 사용할 메소드 명 : 직접 만든 formatter 함수
             
-            onInit: function () {
+            onInit: async function () {
+                this.getView().byId("ui_table").setBusy(true);
+                const Request =  await $.ajax({
+                    type : "get",
+                    url : "/request/Request"
+                });
+                this.getView().byId("ui_table").setBusy(false);
+
+                let RequestModel = new JSONModel(Request.value);
+                this.getView().setModel(RequestModel, "RequestModel");
+
+            },
+            onNavToDetail : function(oEvent) {
+                /**
+                 * @param SelectedNum : 도저히 경로 이해 불가
+                 */
+                console.log(oEvent.getParameters());
+                let SelectedNum = oEvent.getParameters().row.mAggregations.cells[0].mProperties.text;
+
+                this.getOwnerComponent().getRouter().navTo("RequestDetail", {num : SelectedNum,table:"grid"});
+                //, {변수명 : manifest route에 작성한 변수명과 일치시켜야 함}
 
             },
             
@@ -179,6 +207,10 @@ sap.ui.define([
             clearSelection: function(evt) {
                 this.byId("ui_table").clearSelection();
             },
+
+		alert: function(oEvent) {
+			
+		},
             	
     
         });

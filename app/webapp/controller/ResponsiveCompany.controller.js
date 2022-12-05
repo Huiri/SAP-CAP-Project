@@ -79,6 +79,14 @@ sap.ui.define(
                 //주소줄에 입력해서 이동하고 싶을 시 #/CreateOrder -> # :해시 기반으로 타겟 찾아오기 때문
 
             },
+            alert: function(oEvent) {
+			
+            },
+            toDetailPage : function(oEvent) {
+                let SelectedNum = oEvent.getSource().mAggregations.cells[0].mProperties.text;
+                console.log(SelectedNum);
+                this.getOwnerComponent().getRouter().navTo("CompanyDetail", {num : SelectedNum, table: "responsive"});
+            }
         
       });
     }

@@ -23,6 +23,7 @@
         </f:title>
 		<f:content>
 			<t:Table id="ui_table"
+                rowActionCount="1"
 				rows="{Vendor>/Company}"
 				selectionMode="MultiToggle"
                 visibleRowCount="3"
@@ -160,6 +161,14 @@
 					
 					
 				</t:columns>
+                <t:rowActionTemplate>
+                    <t:RowAction id="_IDGenRowAction1" >
+                        <t:items>
+                            <t:RowActionItem id="_IDGenRowActionItem1"  type="Navigation" press="onNavToDetail"></t:RowActionItem>
+                        </t:items>
+                    </t:RowAction>
+                </t:rowActionTemplate>
+
 			</t:Table>
 		</f:content>
 	</f:DynamicPage>
