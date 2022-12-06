@@ -162,7 +162,7 @@
         },
         {
           "name" : "CreateOrder",
-          "pattern": "CreateOrder",
+          "pattern": "CreateOrder/{num}",
           "target" : [
             "CreateOrder"
           ]
