@@ -2,7 +2,7 @@ sap.ui.define(
     [
         "sap/ui/core/mvc/Controller", "../model/formatter",
         "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator", "sap/ui/model/Sorter", "sap/ui/core/Fragment"
+        "sap/ui/model/FilterOperator", "sap/ui/model/Sorter", "sap/ui/core/Fragment"
     ],
     function(Controller, formatter, Filter, FilterOperator, Sorter, Fragment) {
       "use strict";
@@ -83,6 +83,8 @@ sap.ui.define(
 			
             },
             toDetailPage : function(oEvent) {
+                console.log(oEvent.getSource());
+                console.log(oEvent.getParameters());
                 let SelectedNum = oEvent.getSource().mAggregations.cells[0].mProperties.text;
                 console.log(SelectedNum);
                 this.getOwnerComponent().getRouter().navTo("CompanyDetail", {num : SelectedNum, table: "responsive"});
