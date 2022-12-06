@@ -3,17 +3,17 @@
 	xmlns:core="sap.ui.core">
 	<ViewSettingsDialog
         id="SortDialog"
-        confirm="onConfirmSortDialog"
+        confirm=".onConfirmSortDialog"
         title="물품 요청 정렬">
         <!-- //Dialog 화면에 사용할 함수 및 제목 선언
         //confirm, 즉 확인 버튼 누를 시 실행할 함수 선언 -->
          <sortItems><!--//정렬할 항목들 선언 -->
-            <ViewSettingsItem id="_IDGenViewSettingsItem1" text="요청 번호" key="ReqNum" selected="true"/>
-            <ViewSettingsItem id="_IDGenViewSettingsItem2" text="요청 물품" key="ReqGood"/>
-            <ViewSettingsItem id="_IDGenViewSettingsItem3" text="물품 개수" key="ReqQty"/>
-            <ViewSettingsItem id="_IDGenViewSettingsItem4" text="요청자" key="Requester"/>
-            <ViewSettingsItem id="_IDGenViewSettingsItem5" text="요청 날짜" key="ReqDate"/>
-            <ViewSettingsItem id="_IDGenViewSettingsItem6" text="처리 상태" key="ReqStatus"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem1" text="요청 번호" key="request_number" selected="true"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem2" text="요청 물품" key="request_product"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem3" text="물품 개수" key="request_quantity"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem4" text="요청자" key="requestor"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem5" text="요청 날짜" key="request_date"/>
+            <ViewSettingsItem id="_IDGenViewSettingsItem6" text="처리 상태" key="request_state"/>
         </sortItems>
         
     </ViewSettingsDialog>
