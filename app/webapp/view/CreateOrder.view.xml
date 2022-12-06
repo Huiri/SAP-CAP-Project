@@ -26,14 +26,14 @@
                         <form:content>
                             <VBox id="_IDGenVBox1">
                                 <Label id="_IDGenLabel1" text="요청 번호"/>
-                                <Input id="ReqNum"/>
+                                <Text id="ReqNum" text=""/>
                                 <layoutData>
                                     <layout:GridData id="_IDGenGridData1" span="XL6 L6 M3 S12"/>
                                 </layoutData>
                             </VBox>
                             <VBox id="_IDGenVBox2">
                                 <Label id="_IDGenLabel2" text="요청 일자"/>
-                                <DatePicker id="ReqDate" displayFormat="yyyy-MM"/>
+                                <Text id="ReqDate" text=""/>
                                 <layoutData>
                                     <layout:GridData id="_IDGenGridData2" span="XL6 L6 M3 S12"/>
                                 </layoutData>
@@ -54,7 +54,7 @@
                             </VBox>
                             <VBox id="_IDGenVBox5">
                                 <Label id="_IDGenLabel5" text="요청자"/>
-                                <Input id="Requester"/>
+                                <Input id="Requestor"/>
                                 <layoutData>
                                     <layout:GridData id="_IDGenGridData5" span="XL6 L6 M3 S12"/>
                                 </layoutData>
@@ -106,7 +106,7 @@
             <!-- 기본으로 좌->우로 정렬 -->
                 <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
                 <!-- ToolbarSpacer : 우측 정렬을 위해 사용 -->
-                <Button id="_IDGenButton1" type="Emphasized" text="생성"/>
+                <Button id="_IDGenButton1" type="Emphasized" text="생성" press=".onCreate"/>
                 <!-- 버튼 클릭 시 이전 페이지(Request)로 돌아감 -->
                 <Button id="_IDGenButton2" type="Default" text="취소" press=".onBack"/>
             </OverflowToolbar>
