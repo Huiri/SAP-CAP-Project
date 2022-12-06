@@ -17,7 +17,7 @@
                 <Image id="IdGenImage2" height = "1.5rem"
                      class="sapUiSmallMarginBegin"
                      src="view/img/logo.svg"/>
-                <MenuButton id="_IDGenMenuButton1" enabled="true" text="물품 요청">
+                <MenuButton id="_IDGenMenuButton1" enabled="true" text="물품 요청" buttonMode="Split" width="auto">
                     <menu>
                         <Menu id="_IDGenMenu1">
                             <MenuItem press="toRequest" id="_IDGenMenuItem1" text="물품 요청 목록"/>
