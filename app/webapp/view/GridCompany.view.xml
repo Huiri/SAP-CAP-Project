@@ -164,7 +164,8 @@
                 <t:rowActionTemplate>
                     <t:RowAction id="_IDGenRowAction1" >
                         <t:items>
-                            <t:RowActionItem id="_IDGenRowActionItem1"  type="Navigation" press="onNavToDetail"></t:RowActionItem>
+                            <t:RowActionItem id="_IDGenRowActionItem1"  type="Navigation" press=".onNavToDetail"></t:RowActionItem>
+                            <t:RowActionItem id="_IDGenRowActionItem2"  type="Delete" press=".onDeleteRow"></t:RowActionItem>
                         </t:items>
                     </t:RowAction>
                 </t:rowActionTemplate>

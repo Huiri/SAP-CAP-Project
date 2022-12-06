@@ -2,9 +2,9 @@ sap.ui.define(
     [
         "sap/ui/core/mvc/Controller", "../model/formatter",
         "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator", "sap/ui/model/Sorter", "sap/ui/core/Fragment"
+    "sap/ui/model/FilterOperator", "sap/ui/model/Sorter", "sap/ui/core/Fragment", "sap/ui/model/json/JSONModel"
     ],
-    function(Controller, formatter, Filter, FilterOperator, Sorter, Fragment) {
+    function(Controller, formatter, Filter, FilterOperator, Sorter, Fragment, JSONModel) {
       "use strict";
       var that;
   
@@ -14,7 +14,7 @@ sap.ui.define(
         onInit : async function() {
             that = this;
             this.getView().byId("ui_table").setBusy(true);
-            const Request =  await $.ajax({
+            const Company =  await $.ajax({
                 type : "get",
                 url : "/company/Company"
             });
@@ -26,11 +26,27 @@ sap.ui.define(
 
         },
         onNavToDetail : function(oEvent) {
+            console.log(oEvent.getSource());
             console.log(oEvent.getParameters());
             let SelectedNum = oEvent.getParameters().row.mAggregations.cells[0].mProperties.text;
             console.log(SelectedNum);
             this.getOwnerComponent().getRouter().navTo("CompanyDetail", {num : SelectedNum, table : "grid"});
             //, {변수명 : manifest route에 작성한 변수명과 일치시켜야 함}
+
+        },
+        onDeleteRow : async function(oEvent){
+            that = this;
+            let SelectedNum = oEvent.getParameters().row.mAggregations.cells[0].mProperties.text;
+
+            this.getView().byId("ui_table").setBusy(true);
+            const Company =  await $.ajax({
+                type : "delete",
+                url : "/company/Company" + SelectedNum
+            });
+            this.getView().byId("ui_table").setBusy(false);
+
+            let CompanyModel = new JSONModel(Company.value);
+            this.getView().setModel(CompanyModel, "CompanyModel");
 
         },
 
