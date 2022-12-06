@@ -143,8 +143,8 @@
                 cellClick=".getRowData"
                 rowActionCount="1" 
                 id="ui_table"
+                selectionMode="None"
                 rows="{RequestModel>/}" 
-                selectionBehavior="RowOnly"
                 width="auto">
                 <!-- SelectionMode : 여러 row 선택 가능
                 rows : row에 할당할 데이터 경로 지정
@@ -188,7 +188,13 @@
                                     press=".onCreateOrder"
                                     type="Transparent"/>
                                 <!-- 버튼 클릭 시 정렬 조건 설정 가능한 dialog 창 띄우는 함ㅅ ㅜ실행 -->
-                                <Button id="_IDGenButton6"
+                                <Button 
+                                    id="_IDGenButton0"
+                                    tooltip="삭제"
+                                    icon="sap-icon://delete"
+                                    press=".onDeleteOrd"
+                                    type="Transparent"/>
+                                <Button id="_IDGenButton8"
                                     icon="sap-icon://sort"
                                     tooltip="정렬"
                                     press=".onSort" 
@@ -200,6 +206,19 @@
 
                 <!-- col 여러개 생성할 거라서 columns 태그를 상위에 위치시킴 -->
                 <t:columns>
+                    <t:Column id="_IDGenColumn0" hAlign="Center" width="4rem">
+                        <!-- <Label><Text> sap.m에 존재하기 때문에 namespace:Label || Text 선언 X -->
+                        <CheckBox id="checkAll" select=".onCheckExecute" />
+                        <!-- {checkBoxModel>/show} -->
+                        <t:template>
+                            <CheckBox 
+                            visible="{=${RequestModel>request_state} === 'B' ? true : false}"
+                            selected="{RequestModel>CHK}" 
+                            id="toBeDeleted"/>
+                            <!-- rows로 불러온 값 중에서도 ReqNum 값을 할당 -->
+                        </t:template>  
+                    </t:Column>
+
                     <t:Column id="_IDGenColumn1" hAlign="Center">
                         <!-- <Label><Text> sap.m에 존재하기 때문에 namespace:Label || Text 선언 X -->
                         <Label id="_IDGenLabel1" text="요청번호"/>

@@ -14,34 +14,94 @@ sap.ui.define([
 	FilterOperator,
 	Sorter,
 	Fragment,
-	JSONModel) {//사용할 모듈의 별칭 선언(순서 맞춰 주어야 오류 발생 X)
+    JSONModel) {//사용할 모듈의 별칭 선언(순서 맞춰 주어야 오류 발생 X)
         "use strict";
-
+        let totalNumber;
         return Controller.extend("project1.controller.Request", { // 소괄호 안의 경로 파일을 컨트롤러로 사용하겠다는 선언
             formatter:formatter, //뷰에서 사용할 메소드 명 : 직접 만든 formatter 함수
             
             onInit: async function () {
+                const myRoute = this.getOwnerComponent().getRouter().getRoute("Request");
+                myRoute.attachPatternMatched(this.onMyRoutePatternMatched, this);
+            },
+            onMyRoutePatternMatched :async function(){
+                this.onDataView();
+                this.onReset();
+            },
+            onCheckExecute : function(){
+                let ischecked = this.byId("checkAll").getSelected();
+                if(ischecked === true) {
+                    this.onCheckAll(true);
+                } else {
+                    this.onCheckAll(false);
+
+                }
+            },
+            onCheckAll : function (ischecked){
+                let model= this.getView().getModel("RequestModel");
+                for(let i = 0; i < totalNumber; i++){
+                    let request_state = `/${i}/request_state`;
+
+                    if(model.getProperty(request_state) ==='B'){
+                        let key =`/${i}/CHK`;
+                        let request_number = model.setProperty(key, ischecked);
+
+                    }
+                }
+            
+            },
+            onDataView : async function(){
                 this.getView().byId("ui_table").setBusy(true);
                 const Request =  await $.ajax({
                     type : "get",
                     url : "/request/Request"
                 });
-                this.getView().byId("ui_table").setBusy(false);
+                 this.getView().byId("ui_table").setBusy(false);
 
                 let RequestModel = new JSONModel(Request.value);
                 this.getView().setModel(RequestModel, "RequestModel");
 
+                totalNumber = this.getView().getModel("RequestModel").oData.length;
+
+                let TableIndex = "물품 요청 목록 (" + totalNumber +")";
+                this.getView().byId("TableName").setText(TableIndex); 
+
+            },
+            onCreateOrder : function(){
+                let CreateOrder = this.getView().getModel("RequestModel").oData;
+                let CreateOrderIndex = CreateOrder.length;
+                let CreateNum = CreateOrder[CreateOrderIndex - 1].request_number + 1;
+                this.getOwnerComponent().getRouter().navTo("CreateOrder", {num : CreateNum});
             },
             onNavToDetail : function(oEvent) {
-                /**
-                 * @param SelectedNum : 도저히 경로 이해 불가
-                 */
-                console.log(oEvent.getParameters());
-                let SelectedNum = oEvent.getParameters().row.mAggregations.cells[0].mProperties.text;
-
+                let SelectedNum = oEvent.getParameters().row.mAggregations.cells[1].mProperties.text;
+                console.log(SelectedNum);
                 this.getOwnerComponent().getRouter().navTo("RequestDetail", {num : SelectedNum,table:"grid"});
                 //, {변수명 : manifest route에 작성한 변수명과 일치시켜야 함}
 
+            },
+
+            onDeleteOrd : async function(){
+
+                let model= this.getView().getModel("RequestModel");
+                for(let i = 0; i < totalNumber; i++){
+                    let chk = `/${i}/CHK`;
+                    if(model.getProperty(chk) === true){
+                        let key =`/${i}/request_number`;
+                        let request_number = model.getProperty(key);
+                        await this.onDelete(request_number);
+                    }
+                }
+                this.onDataView();
+            },
+            onDelete : async function(key) {
+                let url = `/request/Request/${key}`;
+                await fetch(url, {
+                    method : "DELETE",
+                    headers : {
+                        "Content-Type" : "application/json;IEEE754Compatible=true"
+                    }
+                })
             },
             
             //검색을 위한 함수
@@ -71,14 +131,19 @@ sap.ui.define([
 
             },
 
-            //input 초기화 위한 함수
-            onReset : function () {
+            onClearField : function (){
                 this.byId("ReqNum").setValue(""); 
                 this.byId("ReqGood").setValue(""); 
                 this.byId("Requester").setValue(""); 
                 this.byId("ReqStatus").setSelectedKey(""); 
                 this.byId("ReqDate").setValue(""); 
                 //input 값 초기화
+                 
+
+            },
+            //input 초기화 위한 함수
+            onReset : function () {
+                this.onClearField();
                 this.onSearch(); // this가 onSearch를 가리키도록 함
             },
 
@@ -113,7 +178,6 @@ sap.ui.define([
                     this.byId("SortDialog").open("filter");//SortDialog라는 id값을 가진 화면에 띄우기(fragment dialog 띄우기)
                     
                 }
-                console.log(this.onSearch());
                 // this.onSearch();//화면에 보여주기 위함 -> 필요없다고 지우심
 
             },
@@ -133,7 +197,10 @@ sap.ui.define([
                 oBinding.sort(aSorters); // 테이블에 존재하는 데이터를 설정된 정렬 조건 적용
             },
             onCreateOrder :function (){
-                this.getOwnerComponent().getRouter().navTo("CreateOrder");
+                let SelectedIndex = this.getView().getModel("RequestModel").oData.length-1;
+                let SelectedNum = this.getView().getModel("RequestModel").oData[SelectedIndex].request_number;
+                console.log(SelectedNum);
+                this.getOwnerComponent().getRouter().navTo("CreateOrder", {num : SelectedNum});
                 //getOwnerComponent : manifest||Component에 있는 정보 불러올 때 사용하는 메소드
                 //getRouter : Router의 정보를 가져오고자 할 때 사용하는 메소드
                 //navTo : navigation To의 약자, routes의 name을 통해 이동
@@ -206,6 +273,9 @@ sap.ui.define([
             //선택 취소
             clearSelection: function(evt) {
                 this.byId("ui_table").clearSelection();
+            },
+            onDeleteOrder : function(){
+                
             },
 
 		alert: function(oEvent) {
