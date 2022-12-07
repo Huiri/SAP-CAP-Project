@@ -31,11 +31,7 @@ sap.ui.define([
                 let req_price = this.byId("ReqPrice").getValue();
                 let req_reason = this.byId("ReqReason").getValue();
                 let msg;
-                if(req_good !== null && req_good !== "" && req_qty !== null && req_qty !== "" 
-                 && requestor !== null && requestor !== "" && req_price !== null && req_price !== "" 
-                 && req_reason !== null && req_reason !== ""){
-                    return;
-                } else if(req_good === null || req_good === "") {
+                if(req_good === null || req_good === "") {
                     msg = "요청 물품을 입력해주세요.";
                 } else if(req_qty === null || req_qty === "") {
                     msg = "물품 개수를 입력해주세요.";
@@ -45,6 +41,8 @@ sap.ui.define([
                     msg = "예상 가격을 입력해주세요.";
                 } else if(req_reason === null || req_reason === "") {
                     msg = "요청 사유를 입력해주세요.";
+                } else{
+                    return;
                 }
                 MessageBox.error(msg);
                 return false;

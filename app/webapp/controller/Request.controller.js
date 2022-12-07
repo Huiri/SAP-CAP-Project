@@ -44,7 +44,7 @@ sap.ui.define([
 
                     if(model.getProperty(request_state) ==='B'){
                         let key =`/${i}/CHK`;
-                        let request_number = model.setProperty(key, ischecked);
+                        model.setProperty(key, ischecked);
 
                     }
                 }
@@ -69,8 +69,8 @@ sap.ui.define([
             },
             onCreateOrder : function(){
                 let CreateOrder = this.getView().getModel("RequestModel").oData;
-                let CreateOrderIndex = CreateOrder.length;
-                let CreateNum = CreateOrder[CreateOrderIndex - 1].request_number + 1;
+                let CreateOrderIndex = CreateOrder.length - 1;
+                let CreateNum = CreateOrder[CreateOrderIndex].request_number + 1;
                 this.getOwnerComponent().getRouter().navTo("CreateOrder", {num : CreateNum});
             },
             onNavToDetail : function(oEvent) {

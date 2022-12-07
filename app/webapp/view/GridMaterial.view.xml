@@ -25,7 +25,7 @@
 				<t:extension> 
                     <OverflowToolbar id="_IDGenOverflowToolbar1" >
                     <!-- 왼쪽부터 자식 요소가 생성됨 -->
-                        <Title id="TableName" text="협력 업체 목록"/>
+                        <Title id="TableName" text="부품 목록"/>
                         <ToolbarSpacer id="_IDGenToolbarSpacer1"/><!-- 우측에 요소를 정렬하고 싶을 때 사용 -->
                         <!-- 버튼 클릭 시 물품 요청 생성 페이지로 이동 -->
                         <Button 
@@ -33,7 +33,7 @@
                             text="반응형 테이블"
                             press=".toResponsiveTable"
                             type="Transparent"/>
-                            <Button 
+                        <Button 
                             id="_IDGenButton8"
                             text="부품 추가"
                             press=".onCreateMaterial"
