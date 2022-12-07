@@ -1,7 +1,7 @@
 {
   "_version": "1.42.0",
   "sap.app": {
-    "id": "project1",
+    "id": "project4",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -68,26 +68,6 @@
         "sap.ushell": {}
       }
     },
-    "componentUsages": {
-      "requestComponent" : {
-        "name" : "project2",
-        "settings" : {},
-        "componentData" : {},
-        "lazy" : true
-      },
-      "companyComponent" : {
-        "name" : "project3",
-        "settings" : {},
-        "componentData" : {},
-        "lazy" : true
-      },
-      "productComponent" : {
-        "name" : "project4",
-        "settings" : {},
-        "componentData" : {},
-        "lazy" : true
-      }
-    },
     "contentDensities": {
       "compact": true,
       "cozy": true
@@ -96,8 +76,17 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "project1.i18n.i18n"
+          "bundleName": "project4.i18n.i18n"
         }
+      },
+      "": {
+        "dataSource": "mainService2",
+        "preload": true,
+        "settings": {}
+      },
+      "Material" : {
+        "type" : "sap.ui.model.json.JSONModel",
+        "uri" : "model/MaterialMaster.json"
       },
       "Request" : {
         "dataSource": "requestService",
@@ -132,60 +121,17 @@
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
         "async": true,
-        "viewPath": "project1.view",
+        "viewPath": "project4.view",
         "controlAggregation": "pages",
         "controlId": "app",
         "clearControlAggregation": false
       },
       "routes": [
         {
-          "name": "GridCompany",
-          "pattern": "GridCompany",
-          "target": {
-            "name" : "GridCompany",
-            "prefix": "GridCompany"
-          }
-        },
-        {
-          "name": "GridMaterial",
-          "pattern": "GridMaterial",
-          "target": {
-            "name" : "GridMaterial",
-            "prefix": "GridMaterial"
-          }
-        },
-        {
-          "name": "ResponsiveCompany",
-          "pattern": "ResponsiveCompany",
-          "target": [ "ResponsiveCompany"]
-        },
-        {
-          "name": "Request",
-          "pattern": "",
-          "target": {
-            "name" : "Request",
-            "prefix": "Request"
-          }
-        },
-        {
-          "name" : "CreateOrder",
-          "pattern": "CreateOrder/{num}",
-          "target" : [
-            "CreateOrder"
-          ]
-        },
-        {
           "name": "Routeapp",
           "pattern": "Routeapp",
           "target": [
             "Targetapp"
-          ]
-        },
-        {
-          "name": "AddCompany",
-          "pattern": "AddCompany/{num}",
-          "target": [
-            "AddCompany"
           ]
         },
         {
@@ -196,34 +142,19 @@
           ]
         },
         {
+          "name": "GridMaterial",
+          "pattern": "",
+          "target": [
+            "GridMaterial"
+          ]
+        },
+        {
           "name": "ResponsiveMaterial",
           "pattern": "ResponsiveMaterial",
           "target": [
             "ResponsiveMaterial"
           ]
-        },
-        {
-          "name": "Practice",
-          "pattern": "Practice",
-          "target": [
-            "Practice"
-          ]
-        },
-        {
-          "name": "RequestDetail",
-          "pattern": "RequestDetail/{num}/{table}",
-          "target": [
-            "RequestDetail"
-          ]
-        },
-        {
-          "name": "CompanyDetail",
-          "pattern": "CompanyDetail/{num}/{table}",
-          "target": [
-            "CompanyDetail"
-          ]
-        }
-        
+        }        
         
       ],
       "targets": {
@@ -235,34 +166,12 @@
           "viewName": "ResponsiveMaterial"
         }, 
         "GridMaterial": {
-          "type" : "Component",
-          "usage" : "productComponent",
-          "title" : "GridMaterial"
-        }, 
-        "GridCompany": {
-          "type" : "Component",
-          "usage" : "companyComponent",
-          "title" : "GridCompany"
-        }, 
-        "ResponsiveCompany": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-          "viewId": "ResponsiveCompany",
-          "viewName": "ResponsiveCompany"
+          "viewId": "GridMaterial",
+          "viewName": "GridMaterial"
         }, 
-        "Request": {
-          "type" : "Component",
-          "usage" : "requestComponent",
-          "title" : "Request"
-        }, 
-        "CreateOrder" : {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": true,
-          "viewId": "CreateOrder",
-          "viewName": "CreateOrder"
-        },
         "Targetapp": {
           "viewType": "XML",
           "transition": "slide",
@@ -270,45 +179,17 @@
           "viewId": "app",
           "viewName": "app"
         },
-        "AddCompany": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": true,
-          "viewId": "AddCompany",
-          "viewName": "AddCompany"
-        },
         "AddMaterial": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "AddMaterial",
           "viewName": "AddMaterial"
-        },
-        "Practice" : {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": true,
-          "viewId": "Practice",
-          "viewName": "Practice"
-        },
-        "RequestDetail" : {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": true,
-          "viewId": "RequestDetail",
-          "viewName": "RequestDetail"
-        },
-        "CompanyDetail" : {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": true,
-          "viewId": "CompanyDetail",
-          "viewName": "CompanyDetail"
         }
       }
     },
     "rootView": {
-      "viewName": "project1.view.App",
+      "viewName": "project4.view.App",
       "type": "XML",
       "async": true,
       "id": "App"

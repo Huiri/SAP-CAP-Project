@@ -1,7 +1,7 @@
 {
   "_version": "1.42.0",
   "sap.app": {
-    "id": "project1",
+    "id": "project3",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -68,26 +68,6 @@
         "sap.ushell": {}
       }
     },
-    "componentUsages": {
-      "requestComponent" : {
-        "name" : "project2",
-        "settings" : {},
-        "componentData" : {},
-        "lazy" : true
-      },
-      "companyComponent" : {
-        "name" : "project3",
-        "settings" : {},
-        "componentData" : {},
-        "lazy" : true
-      },
-      "productComponent" : {
-        "name" : "project4",
-        "settings" : {},
-        "componentData" : {},
-        "lazy" : true
-      }
-    },
     "contentDensities": {
       "compact": true,
       "cozy": true
@@ -96,7 +76,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "project1.i18n.i18n"
+          "bundleName": "project3.i18n.i18n"
         }
       },
       "Request" : {
@@ -132,7 +112,7 @@
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
         "async": true,
-        "viewPath": "project1.view",
+        "viewPath": "project3.view",
         "controlAggregation": "pages",
         "controlId": "app",
         "clearControlAggregation": false
@@ -140,38 +120,16 @@
       "routes": [
         {
           "name": "GridCompany",
-          "pattern": "GridCompany",
-          "target": {
-            "name" : "GridCompany",
-            "prefix": "GridCompany"
-          }
-        },
-        {
-          "name": "GridMaterial",
-          "pattern": "GridMaterial",
-          "target": {
-            "name" : "GridMaterial",
-            "prefix": "GridMaterial"
-          }
+          "pattern": "",
+          "target": [
+            "GridCompany"
+          ]
         },
         {
           "name": "ResponsiveCompany",
           "pattern": "ResponsiveCompany",
-          "target": [ "ResponsiveCompany"]
-        },
-        {
-          "name": "Request",
-          "pattern": "",
-          "target": {
-            "name" : "Request",
-            "prefix": "Request"
-          }
-        },
-        {
-          "name" : "CreateOrder",
-          "pattern": "CreateOrder/{num}",
-          "target" : [
-            "CreateOrder"
+          "target": [
+            "ResponsiveCompany"
           ]
         },
         {
@@ -189,34 +147,6 @@
           ]
         },
         {
-          "name": "AddMaterial",
-          "pattern": "AddMaterial",
-          "target": [
-            "AddMaterial"
-          ]
-        },
-        {
-          "name": "ResponsiveMaterial",
-          "pattern": "ResponsiveMaterial",
-          "target": [
-            "ResponsiveMaterial"
-          ]
-        },
-        {
-          "name": "Practice",
-          "pattern": "Practice",
-          "target": [
-            "Practice"
-          ]
-        },
-        {
-          "name": "RequestDetail",
-          "pattern": "RequestDetail/{num}/{table}",
-          "target": [
-            "RequestDetail"
-          ]
-        },
-        {
           "name": "CompanyDetail",
           "pattern": "CompanyDetail/{num}/{table}",
           "target": [
@@ -227,22 +157,12 @@
         
       ],
       "targets": {
-        "ResponsiveMaterial": {
+        "GridCompany": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-          "viewId": "ResponsiveMaterial",
-          "viewName": "ResponsiveMaterial"
-        }, 
-        "GridMaterial": {
-          "type" : "Component",
-          "usage" : "productComponent",
-          "title" : "GridMaterial"
-        }, 
-        "GridCompany": {
-          "type" : "Component",
-          "usage" : "companyComponent",
-          "title" : "GridCompany"
+          "viewId": "GridCompany",
+          "viewName": "GridCompany"
         }, 
         "ResponsiveCompany": {
           "viewType": "XML",
@@ -251,18 +171,6 @@
           "viewId": "ResponsiveCompany",
           "viewName": "ResponsiveCompany"
         }, 
-        "Request": {
-          "type" : "Component",
-          "usage" : "requestComponent",
-          "title" : "Request"
-        }, 
-        "CreateOrder" : {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": true,
-          "viewId": "CreateOrder",
-          "viewName": "CreateOrder"
-        },
         "Targetapp": {
           "viewType": "XML",
           "transition": "slide",
@@ -277,27 +185,6 @@
           "viewId": "AddCompany",
           "viewName": "AddCompany"
         },
-        "AddMaterial": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": true,
-          "viewId": "AddMaterial",
-          "viewName": "AddMaterial"
-        },
-        "Practice" : {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": true,
-          "viewId": "Practice",
-          "viewName": "Practice"
-        },
-        "RequestDetail" : {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": true,
-          "viewId": "RequestDetail",
-          "viewName": "RequestDetail"
-        },
         "CompanyDetail" : {
           "viewType": "XML",
           "transition": "slide",
@@ -308,7 +195,7 @@
       }
     },
     "rootView": {
-      "viewName": "project1.view.App",
+      "viewName": "project3.view.App",
       "type": "XML",
       "async": true,
       "id": "App"

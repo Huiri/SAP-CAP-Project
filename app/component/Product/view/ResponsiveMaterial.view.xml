@@ -1,0 +1,122 @@
+<mvc:View
+	controllerName="project4.controller.ResponsiveMaterial"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.f"
+    height="100%"
+	xmlns="sap.m">
+	<f:DynamicPage id="_IDGenPage1"
+		toggleHeaderOnTitleClick="true"
+		class="sapUiContentPadding">
+        <f:title>
+            <f:DynamicPageTitle id="_IDGenDynamicPageTitle1" >
+                <f:content>
+                    <HBox id="_IDGenHBox1">
+                        <mvc:XMLView id="_IDGenXMLView1" viewName="project4.view.NestedView.MaterialHeader"/>
+                    </HBox>
+
+                </f:content>
+            </f:DynamicPageTitle>
+        </f:title>
+
+
+        <f:content>
+        <Table
+            width = "100%"
+            id="ui_table"
+            inset="false"
+            items="{
+                path: 'Material>/productList',
+                sorter: {
+                    path: 'Material>category',
+                    descending : true
+                }
+            }">
+            <headerToolbar>
+                <OverflowToolbar id="_IDGenOverflowToolbar1">
+                    <content>
+                        <Title id="_IDGenTitle1" text="부품 목록" level="H2"/>
+                        <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                        
+                        <Button id="_IDGenButton1" text="그리드 테이블" press=".toGridTable"
+                                type="Transparent"/>
+                        <!-- 버튼 클릭 시 정렬 조건 설정 가능한 dialog 창 띄우는 함수 실행 -->
+                        <Button id="_IDGenButton6"
+                            icon="sap-icon://sort"
+                            tooltip="정렬"
+                            press=".onSort" 
+                            type="Transparent"/>
+                            <!-- press : 버튼 눌렀을 때 어떤 함수를 호출할 지 -->
+                            <!-- tooltip : 버튼에 마우스 hover 시 표시해줄 값 선언, 버튼 용도 설명용  -->
+                    </content>
+                </OverflowToolbar>
+            </headerToolbar>
+            <columns>
+                <Column id="_IDGenColumn1" mergeDuplicates="true">
+                    <Text id="_IDGenText1" text="부품 카테고리" />
+                </Column>
+                <Column id="_IDGenColumn2">
+                    <Text id="_IDGenText2" text="부품 코드" />
+                </Column>
+                <Column id="_IDGenColumn3" hAlign="Begin">
+                    <Text id="_IDGenText3" text="부품 명" textAlign="End"/>
+                </Column>
+                <Column id="_IDGenColumn4">
+                    <Text id="_IDGenText4" text="단위" />
+                </Column>
+                <Column id="_IDGenColumn5" hAlign="End">
+                    <Text id="_IDGenText5" text="부품 단가" textAlign="End"/>
+                </Column>
+                <Column id="_IDGenColumn6" hAlign="Center">
+                    <Text id="_IDGenText6" text="부품 생산 여부" />
+                </Column>
+                
+                <Column id="_IDGenColumn7" hAlign="Center">
+                    <Text id="_IDGenText7" text="등록 일자" />
+                </Column>
+                <Column id="_IDGenColumn8" hAlign="Begin">
+                    <Text id="_IDGenText8" text="비고" />
+                </Column>
+                
+            </columns>
+            <items>
+                <ColumnListItem id="_IDGenColumnListItem1" vAlign="Middle">
+                    <cells>
+                        <Text id="_IDGenText9"
+                            text="{Material>category}" />
+                        <Text id="_IDGenText10"
+                            text="{Material>code}" />
+                        <Text id="_IDGenText11"
+                            text="{Material>name}" />
+                        <Text id="_IDGenText12"
+                            text="{Material>unit}" />
+                        <ObjectStatus 
+                            id="_IDGenObjectStatus1"
+                            text="{
+                                path:'Material>cost',
+                                formatter:'.formatter.numberWithCommas'
+                                }"/>
+                        
+                                        
+                        <ObjectStatus 
+                            id="_IDGenObjectStatus2"
+                            active="true"
+                            press="alert(&#36;{$source>/text} + ' pressed')"
+                            text="{
+                                
+                                path:'Material>produce',
+                                formatter:'.formatter.materialStatus'
+                                }"
+                            state = "{=${Material>produce} === 'A' ? 'Success' 
+                                    : ${Material>produce}  === 'B' ? 'None' 
+                                    : ${Material>produce}  === 'C' ? 'Warning' : 'Error'}"/>
+                        <Text id="_IDGenText13"
+                            text="{Material>date}" /> 
+                        <Text id="_IDGenText14"
+                            text="{Material>etc}" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+        </f:content>
+	</f:DynamicPage>
+</mvc:View>

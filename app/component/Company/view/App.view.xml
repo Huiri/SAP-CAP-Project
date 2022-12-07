@@ -1,0 +1,13 @@
+<!-- XML, HTML, JS, JSON 지원, XMLView 추천 -->
+
+<mvc:View controllerName="project3.controller.App"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:tnt="sap.tnt"
+    xmlns="sap.m"
+    height = "100%">
+    <!-- sap sdk : toolpage layout -->
+    <App id="app">
+    <!-- id="app"은 manifest의 routing의 controlId값으로 연동 -->
+    </App>
+</mvc:View>

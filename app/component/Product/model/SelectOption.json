@@ -1,0 +1,48 @@
+{
+    "SelectedStatus" : "",
+    "ProduceList": [
+        {
+            "ProduceStatus": "",
+            "Value": "전체"
+        },
+        {
+            "ProduceStatus": "A",
+            "Value": "생산"
+        },
+        {
+            "ProduceStatus": "B",
+            "Value": "미 사용"
+        },
+        {
+            "ProduceStatus": "C",
+            "Value": "단종 예정"
+        },
+        {
+            "ProduceStatus": "D",
+            "Value": "단종"
+        }
+        
+    ],
+    "CreditList": [
+        {
+            "CreditStatus": "",
+            "Value": "전체"
+        },
+        {
+            "CreditStatus": "trust",
+            "Value": "신용"
+        },
+        {
+            "CreditStatus": "hold",
+            "Value": "보류"
+        },
+        {
+            "CreditStatus": "caution",
+            "Value": "주의"
+        }
+        
+    ]
+
+
+
+}

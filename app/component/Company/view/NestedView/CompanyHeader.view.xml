@@ -1,0 +1,71 @@
+<mvc:View controllerName="project3.controller.CompanyHeader"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:c="sap.ui.core"
+	xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    height="100%"
+    width="96vw">
+
+    <VBox id="_IDGenVBox_1">
+        <Title id="_IDGenTitle2" text="협력 업체 목록" level="H1" class=""/>
+            <form:SimpleForm id="_IDGenSimpleForm1" layout="ResponsiveGridLayout">
+                <form:content>
+                    <VBox id="_IDGenVBox1">
+                        <Label id="_IDGenLabel_7" text="업체 코드 :"/>
+                        <Input id="ComNum"/>
+                        <layoutData>
+                            <layout:GridData id="_IDGenGridData1" span="XL2 L2 M6 S12"/>
+                        </layoutData>
+                    </VBox>
+
+                    <VBox id="_IDGenVBox2">
+                        <Label id="_IDGenLabel_8" text="업체 명 :"/>
+                        <Input id="ComName"/>
+                        <layoutData>
+                            <layout:GridData id="_IDGenGridData2" span="XL2 L2 M6 S12"/>
+                        </layoutData>
+                    </VBox>
+                    <VBox id="_IDGenVBox3">
+                        <Label id="_IDGenLabel_9" text="담당자 :"/>
+                        <Input id="ComPerson"/>
+                        <layoutData>
+                            <layout:GridData id="_IDGenGridData3" span="XL2 L2 M6 S12"/>
+                        </layoutData>
+                    </VBox>
+                    <VBox id="_IDGenVBox4">
+                        <Label id="_IDGenLabel_10" text="요청 일자 :"/>
+                        <DatePicker id="ComDate"
+                                        displayFormat="yyyy-MM-dd"
+                                    valueFormat="yyyy.MM.dd"/>
+                                    <!-- default : 연-월-일 -->
+                        <layoutData>
+                            <layout:GridData id="_IDGenGridData4" span="XL2 L2 M6 S12"/>
+                        </layoutData>
+                    </VBox>
+
+                    <VBox id="_IDGenVBox5">
+                        <Label id="_IDGenLabel_11" text="신용 상태 :"/>
+                        <Select id="Status" width="100%"
+                            items="{Vendor>/Company_State}">
+                            <c:Item id="_IDGenItem1" key="{Vendor>state_key}" text="{Vendor>state_name}" />
+                    
+                        </Select>
+
+                        <layoutData>
+                            <layout:GridData id="_IDGenGridData5" span="XL2 L2 M6 S12"/>
+                        </layoutData>
+                    </VBox>
+
+                    <FlexBox id="_IDGenHBox_2" justifyContent="End">
+                        <Button id="_IDGenButton_5" text="검색" type="Emphasized" press=".onSearch"/>
+                        <Button id="_IDGenButton_4" text="초기화" type="Transparent" press=".onReset" class="sapUiTinyMarginBegin"/>
+                        <layoutData>
+                            <layout:GridData id="_IDGenGridData7"  span="XL12 L12 M12 S12"/>
+                        </layoutData>
+                    </FlexBox>                       
+                </form:content>
+            </form:SimpleForm>
+        </VBox>
+
+</mvc:View>

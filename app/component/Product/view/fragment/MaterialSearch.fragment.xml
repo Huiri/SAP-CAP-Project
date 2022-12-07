@@ -1,0 +1,69 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core = "sap.ui.core"
+    xmlns:t = "sap.ui.table"
+    xmlns:form ="sap.ui.layout.form"
+    xmlns:layout = "sap.ui.layout">
+	<Dialog id="compop" title ="부품 검색" contentWidth="50%" >
+        <layout:VerticalLayout id="_IDGenVerticalLayout1" class="sapUiContentPadding" width="100%">
+            <VBox id="_IDGenVBox100" >
+                <Label id="test" text="부품 코드 :"/>
+                <Input id="pop_mcode" />
+                <layoutData>
+                    <layout:GridData id="_IDGenGridData100" span="XL12 L12 M12 S12"/>
+                </layoutData>
+            </VBox>
+            <VBox id="_IDGenVBox101">
+                <Label id="_IDGenLabel201" text="부품명 :"/>
+                <Input id="pop_mname"/>
+                <layoutData>
+                    <layout:GridData id="_IDGenGridData101" span="XL12 L12 M12 S12"/>
+                </layoutData>
+            </VBox>
+            <FlexBox id="_IDGenFlexBox100" justifyContent="End">
+                <Button id="_IDGenButton100" text="검색" type="Emphasized" press=".onSearchOpt"/>
+                <Button id="_IDGenButton101"  text="초기화" type="Transparent" press=".onSearchOptReset" class="sapUiTinyMarginBegin"/>
+                <layoutData>
+                    <layout:GridData id="_IDGenGridData102" span="XL12 L12 M12 S12"/>
+                </layoutData>
+            </FlexBox>    
+        </layout:VerticalLayout>
+		<content>
+			<!-- <t:Table id="selection_table"
+                selectionBehavior="RowOnly"
+                selectionMode="Single"
+                rowSelectionChange=".getContext"
+				rows="{Material>/productList}"
+				paste="onPaste"
+				ariaLabelledBy="title"> -->
+            <t:Table id="selection_table"
+                cellClick = ".getEventContext"
+                selectionBehavior="RowOnly"
+
+				rows="{Material>/productList}"
+				paste="onPaste"
+				ariaLabelledBy="title">
+                <t:columns>
+					<t:Column
+                        id="_IDGenColumn100" hAlign="Center">
+						<Label id="_IDGenLabel100" text="부품 코드" textAlign="Center" />
+						<t:template>
+							<Text id="_IDGenText100" text="{Material>code}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<t:Column 
+                        id="_IDGenColumn200" hAlign="Center">
+						<Label id="_IDGenLabel200" text="부품 명" textAlign="Center"/>
+						<t:template>
+							<Text id="_IDGenText200" text="{Material>name}" wrapping="false" />
+						</t:template>
+					</t:Column>
+                </t:columns>
+			</t:Table>
+		</content>
+        <!-- </content> -->
+        <beginButton>
+            <Button id="_IDGenButton102" text="취소" press=".onCloseDialog"/>
+        </beginButton>
+    </Dialog>
+</core:FragmentDefinition>
