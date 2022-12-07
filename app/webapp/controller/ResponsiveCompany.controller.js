@@ -2,16 +2,39 @@ sap.ui.define(
     [
         "sap/ui/core/mvc/Controller", "../model/formatter",
         "sap/ui/model/Filter",
-        "sap/ui/model/FilterOperator", "sap/ui/model/Sorter", "sap/ui/core/Fragment"
+        "sap/ui/model/FilterOperator", "sap/ui/model/Sorter", "sap/ui/core/Fragment",
+        "sap/ui/model/json/JSONModel"
     ],
-    function(Controller, formatter, Filter, FilterOperator, Sorter, Fragment) {
+    function(Controller, formatter, Filter, FilterOperator, Sorter, Fragment, JSONModel) {
       "use strict";
       var that;
-  
+      let totalNumber;
+
       return Controller.extend("project1.controller.ResponsiveCompany", {
         formatter : formatter,
         onInit() {
             that = this;
+            const myRoute = this.getOwnerComponent().getRouter().getRoute("ResponsiveCompany");
+            myRoute.attachPatternMatched(this.onDataView, this);
+
+        },
+        onDataView : async function(){
+            this.getView().byId("ui_table").setBusy(true);
+            const Company =  await $.ajax({
+                type : "get",
+                url : "/company/Company"
+            });
+            this.getView().byId("ui_table").setBusy(false);
+
+            let CompanyModel = new JSONModel(Company.value);
+            this.getView().setModel(CompanyModel, "CompanyModel");
+
+            totalNumber = this.getView().getModel("CompanyModel").oData.length;
+
+            let TableIndex = `협력 업체 목록 (${totalNumber})`;
+            this.getView().byId("TableName").setText(TableIndex); 
+
+
         },
         onSearch : function (aFilter) {
             
@@ -82,6 +105,41 @@ sap.ui.define(
             alert: function(oEvent) {
 			
             },
+            onDeleteCompany : async function (){
+                var aIndices = this.byId("ui_table").getSelectedIndices();
+                var sMsg;
+                if (aIndices.length < 1) {
+                    sMsg = null;
+                } else {
+                    sMsg = aIndices;
+                }
+
+                let model= this.getView().getModel("CompanyModel");
+                if(sMsg === null){
+                    let msg = "삭제될 항목이 선택되지 않았습니다.";
+                    MessageBox.warn(msg);
+                    return;
+                }
+                for(let i = 0; i < sMsg.length; i++){
+                    var index = "/"+sMsg[i] + "/comcode";
+                    var comcode = model.getProperty(index);
+                    console.log(comcode);
+                    await this.onDelete(comcode);
+                }
+                this.onDataView();
+            },
+            onDelete : async function(key){
+                console.log(key);
+                let url = `/company/Company/${key}`;
+                await fetch(url, {
+                    method : "DELETE",
+                    headers : {
+                        "Content-Type" : "application/json;IEEE754Compatible=true"
+                    }
+                })
+
+            },
+
             toDetailPage : function(oEvent) {
                 console.log(oEvent.getSource());
                 console.log(oEvent.getParameters());

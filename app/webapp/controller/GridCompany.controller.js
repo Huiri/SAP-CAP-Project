@@ -7,12 +7,18 @@ sap.ui.define(
     function(Controller, formatter, Filter, FilterOperator, Sorter, Fragment, JSONModel) {
       "use strict";
       var that;
-  
+      let totalNumber;
+
       return Controller.extend("project1.controller.GridCompany", {
         formatter : formatter,
-
         onInit : async function() {
             that = this;
+
+            const myRoute = this.getOwnerComponent().getRouter().getRoute("GridCompany");
+            myRoute.attachPatternMatched(this.onDataView, this);
+
+        },
+        onDataView : async function(){
             this.getView().byId("ui_table").setBusy(true);
             const Company =  await $.ajax({
                 type : "get",
@@ -22,6 +28,11 @@ sap.ui.define(
 
             let CompanyModel = new JSONModel(Company.value);
             this.getView().setModel(CompanyModel, "CompanyModel");
+
+            totalNumber = this.getView().getModel("CompanyModel").oData.length;
+
+            let TableIndex = "협력 업체 목록 (" + totalNumber +")";
+            this.getView().byId("TableName").setText(TableIndex); 
 
 
         },
@@ -37,7 +48,7 @@ sap.ui.define(
         onDeleteRow : async function(oEvent){
             that = this;
             let SelectedNum = oEvent.getParameters().row.mAggregations.cells[0].mProperties.text;
-
+            
             this.getView().byId("ui_table").setBusy(true);
             const Company =  await $.ajax({
                 type : "delete",
@@ -109,6 +120,7 @@ sap.ui.define(
                 oBinding.sort(aSorters); // 테이블에 존재하는 데이터를 설정된 정렬 조건 적용
             },
             toResponsiveTable :function (){
+
                 this.getOwnerComponent().getRouter().navTo("ResponsiveCompany");
                 //getOwnerComponent : manifest||Component에 있는 정보 불러올 때 사용하는 메소드
                 //getRouter : Router의 정보를 가져오고자 할 때 사용하는 메소드
@@ -118,7 +130,45 @@ sap.ui.define(
 
             },
             onCreateVendor : function() {
-                this.getOwnerComponent().getRouter().navTo("AddCompany");
+                let CreateCompany = this.getView().getModel("CompanyModel").oData;
+                let CreateCompanyIndex = CreateCompany.length - 1;
+                let CreateNum = parseInt(CreateCompany[CreateCompanyIndex].comcode) + 1;
+
+                this.getOwnerComponent().getRouter().navTo("AddCompany", {num : CreateNum});
+
+            },
+            onDeleteCompany : async function(){
+                var aIndices = this.byId("ui_table").getSelectedIndices();
+                var sMsg;
+                if (aIndices.length < 1) {
+                    sMsg = null;
+                } else {
+                    sMsg = aIndices;
+                }
+          
+                let model= this.getView().getModel("CompanyModel");
+                if(sMsg === null){
+                    let msg = "삭제될 항목이 선택되지 않았습니다.";
+                    MessageBox.warn(msg);
+                    return;
+                }
+                for(let i = 0; i < sMsg.length; i++){
+                    var index = "/"+sMsg[i] + "/comcode";
+                    var comcode = model.getProperty(index);
+                    console.log(comcode);
+                    await this.onDelete(comcode);
+                }
+                this.onDataView();
+            },
+            onDelete : async function(key){
+                console.log(key);
+                let url = `/company/Company/${key}`;
+                await fetch(url, {
+                    method : "DELETE",
+                    headers : {
+                        "Content-Type" : "application/json;IEEE754Compatible=true"
+                    }
+                })
 
             }
         

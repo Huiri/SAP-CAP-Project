@@ -24,9 +24,8 @@
 		<f:content>
 			<t:Table id="ui_table"
                 rowActionCount="1"
-				rows="{Vendor>/Company}"
+				rows="{CompanyModel>/}"
 				selectionMode="MultiToggle"
-                visibleRowCount="3"
 				paste="onPaste"
 				ariaLabelledBy="title">
 				<t:extension> 
@@ -51,6 +50,11 @@
                             tooltip="정렬"
                             press=".onSort" 
                             type="Transparent"/>
+                        <Button id="_IDGenButton_7"
+                            icon="sap-icon://delete"
+                            tooltip="삭제"
+                            press=".onDeleteCompany" 
+                            type="Transparent"/>
                             <!-- press : 버튼 눌렀을 때 어떤 함수를 호출할 지 -->
                             <!-- tooltip : 버튼에 마우스 hover 시 표시해줄 값 선언, 버튼 용도 설명용  -->
                     </OverflowToolbar>
@@ -62,7 +66,7 @@
                         id="_IDGenColumn1" hAlign="Center">
 						<Label id="_IDGenLabel1" text="업체 코드" textAlign="Center" />
 						<t:template>
-							<Text id="_IDGenText1" text="{Vendor>comcode}" wrapping="false" />
+							<Text id="_IDGenText1" text="{CompanyModel>comcode}" wrapping="false" />
 						</t:template>
 					</t:Column>
 					<t:Column filterProperty="ComName"
@@ -70,7 +74,7 @@
                         id="_IDGenColumn2" hAlign="Center">
 						<Label id="_IDGenLabel2" text="업체명" textAlign="Center"/>
 						<t:template>
-							<Text id="_IDGenText2" text="{Vendor>comname}" wrapping="false" />
+							<Text id="_IDGenText2" text="{CompanyModel>comname}" wrapping="false" />
 						</t:template>
 					</t:Column>
 					
@@ -85,7 +89,7 @@
 							<Label id="_IDGenLabel18" text="주소" textAlign="Center" width="100%"/>
 						</t:multiLabels>
 						<t:template>
-							<Text id="_IDGenText3" text="{Vendor>comaddress}"/>
+							<Text id="_IDGenText3" text="{CompanyModel>comaddress}"/>
 						</t:template>
 					</t:Column>
                     <t:Column id="_IDGenColumn4"
@@ -99,7 +103,7 @@
 							<Label id="_IDGenLabel14" text="담당자" textAlign="Center" width="100%"/>
 						</t:multiLabels>
 						<t:template>
-                            <Text id="_IDGenText4" text="{Vendor>comperson}" />
+                            <Text id="_IDGenText4" text="{CompanyModel>comperson}" />
 						</t:template>
 					</t:Column>
                     <t:Column id="_IDGenColumn5"
@@ -113,7 +117,7 @@
 							<Label id="_IDGenLabel10" text="담당자 연락처" textAlign="Center" width="100%"/>
 						</t:multiLabels>
 						<t:template>
-                            <Text id="_IDGenText5" text="{Vendor>comcontact}" />
+                            <Text id="_IDGenText5" text="{CompanyModel>comcontact}" />
 						</t:template>
 					</t:Column>
                     <t:Column id="_IDGenColumn6"
@@ -126,7 +130,7 @@
 						    <Label id="_IDGenLabel6" text="거래 품목" textAlign="Center"/>
 						</t:multiLabels>
 						<t:template>
-							<Text id="_IDGenText6" text="{Vendor>comgood}"   />
+							<Text id="_IDGenText6" text="{CompanyModel>comgood}"   />
 						</t:template>
 					</t:Column>
 					<t:Column id="_IDGenColumn7"
@@ -139,7 +143,7 @@
 						    <Label id="_IDGenLabel7" text="업체 등록일" textAlign="Center"/>
 						</t:multiLabels>
 						<t:template>
-							<Text id="_IDGenText7" text="{Vendor>comdate}" wrapping="false"/>
+							<Text id="_IDGenText7" text="{CompanyModel>comdate}" wrapping="false"/>
 						</t:template>
 					</t:Column>
 					
@@ -152,10 +156,10 @@
                                 press="alert(&#36;{$source>/text} + ' pressed')"
                                 text="{
                                     
-                                    path:'Vendor>comstate',
+                                    path:'CompanyModel>comstate',
                                     formatter:'.formatter.creditStatus'
                                     }"
-                                state = "{=${Vendor>comstate} === 'trust' ? 'Success' : ${Vendor>comstate}  === 'caution' ? 'None' : 'Error'}"/>
+                                state = "{=${CompanyModel>comstate} === 'trust' ? 'Success' : ${CompanyModel>comstate}  === 'caution' ? 'Error' : 'None'}"/>
 						</t:template>
 					</t:Column>
 					

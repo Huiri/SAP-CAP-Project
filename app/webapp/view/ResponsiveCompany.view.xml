@@ -21,18 +21,18 @@
 			<Table
 				width = "100%"
 				id="ui_table"
-
+				mode="MultiSelect"
 				inset="false"
 				items="{
-					path: 'Vendor>/Company',
+					path: 'CompanyModel>/',
 					sorter: {
-						path: 'Vendor>comcode'
+						path: 'CompanyModel>comcode'
 					}
 				}">
 				<headerToolbar>
 					<OverflowToolbar id="_IDGenOverflowToolbar1">
 						<content>
-							<Title id="_IDGenTitle1" text="협력 업체 목록" level="H2"/>
+							<Title id="TableName" text="협력 업체 목록" level="H2"/>
 							<ToolbarSpacer id="_IDGenToolbarSpacer1" />
 							
 							<Button id="_IDGenButton1" text="그리드 테이블" press=".toGridTable"
@@ -42,6 +42,11 @@
 								icon="sap-icon://sort"
 								tooltip="정렬"
 								press=".onSort" 
+								type="Transparent"/>
+							<Button id="_IDGenButton7"
+								icon="sap-icon://delete"
+								tooltip="삭제"
+								press=".onDeleteCompany" 
 								type="Transparent"/>
 								<!-- press : 버튼 눌렀을 때 어떤 함수를 호출할 지 -->
 								<!-- tooltip : 버튼에 마우스 hover 시 표시해줄 값 선언, 버튼 용도 설명용  -->
@@ -78,29 +83,29 @@
 					<ColumnListItem id="_IDGenColumnListItem1" vAlign="Middle" type="Navigation" press=".toDetailPage">
 						<cells>
 							<Text id="_IDGenText9"
-								text="{Vendor>comcode}" />
+								text="{CompanyModel>comcode}" />
 							<Text id="_IDGenText10"
-								text="{Vendor>comname}" />
+								text="{CompanyModel>comname}" />
 							<Text id="_IDGenText11"
-								text="{Vendor>comaddress}" />
+								text="{CompanyModel>comaddress}" />
 							<Text id="_IDGenText12"
-								text="{Vendor>comperson}" />
+								text="{CompanyModel>comperson}" />
 							<Text id="_IDGenText13"
-								text="{Vendor>comcontact}" />
+								text="{CompanyModel>comcontact}" />
 							<Text id="_IDGenText14"
-								text="{Vendor>comgood}" />
+								text="{CompanyModel>comgood}" />
 							<Text id="_IDGenText15"
-								text="{Vendor>comdate}" />
+								text="{CompanyModel>comdate}" />
 							<ObjectStatus 
 								id="_IDGenObjectStatus1"
 								active="true"
 								press="alert(&#36;{$source>/text} + ' pressed')"
 								text="{
 									
-									path:'Vendor>comstate',
+									path:'CompanyModel>comstate',
 									formatter:'.formatter.creditStatus'
 									}"
-								state = "{=${Vendor>comstate} === 'trust' ? 'Success' : ${Vendor>comstate}  === 'caution' ? 'None' : 'Error'}"/>
+								state = "{=${CompanyModel>comstate} === 'trust' ? 'Success' : ${CompanyModel>comstate}  === 'caution' ? 'Error' : 'None'}"/>
 						</cells>
 					</ColumnListItem>
 					
