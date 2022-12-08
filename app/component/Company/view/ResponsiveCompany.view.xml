@@ -11,7 +11,7 @@
             <f:DynamicPageTitle id="_IDGenDynamicPageTitle1" >
                 <f:content>
                     <HBox id="_IDGenHBox1">
-                        <mvc:XMLView id="_IDGenXMLView1" viewName="project1.view.NestedView.CompanyHeader"/>
+                        <mvc:XMLView id="_IDGenXMLView1" viewName="project3.view.NestedView.CompanyHeader"/>
                     </HBox>
 
                 </f:content>
@@ -38,6 +38,11 @@
 							<Button id="_IDGenButton1" text="그리드 테이블" press=".toGridTable"
 									type="Transparent"/>
 							<!-- 버튼 클릭 시 정렬 조건 설정 가능한 dialog 창 띄우는 함수 실행 -->
+							<Button 
+								id="_IDGenButton8"
+								text="협력 업체 추가"
+								press=".onCreateVendor"
+								type="Transparent"/>
 							<Button id="_IDGenButton6"
 								icon="sap-icon://sort"
 								tooltip="정렬"

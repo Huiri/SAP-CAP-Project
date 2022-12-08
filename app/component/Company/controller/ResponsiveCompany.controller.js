@@ -14,8 +14,8 @@ sap.ui.define(
         formatter : formatter,
         onInit() {
             that = this;
-            const myRoute = this.getOwnerComponent().getRouter().getRoute("ResponsiveCompany");
-            myRoute.attachPatternMatched(this.onDataView, this);
+            this.getOwnerComponent().getRouter().getRoute("ResponsiveCompany").attachPatternMatched(this.onDataView, this);;
+            this.getOwnerComponent().getRouter().getRoute("ResCompanyDetail").attachPatternMatched(this.onDataView, this);;
 
         },
         onDataView : async function(){
@@ -102,6 +102,14 @@ sap.ui.define(
                 //주소줄에 입력해서 이동하고 싶을 시 #/CreateOrder -> # :해시 기반으로 타겟 찾아오기 때문
 
             },
+            onCreateVendor : function() {
+                let CreateCompany = this.getView().getModel("CompanyModel").oData;
+                let CreateCompanyIndex = CreateCompany.length - 1;
+                let CreateNum = parseInt(CreateCompany[CreateCompanyIndex].comcode) + 1;
+
+                this.getOwnerComponent().getRouter().navTo("AddCompany", {num : CreateNum, table : "responsive"});
+
+            },
             alert: function(oEvent) {
 			
             },
@@ -143,7 +151,7 @@ sap.ui.define(
                 console.log(oEvent.getParameters());
                 let SelectedNum = oEvent.getSource().mAggregations.cells[0].mProperties.text;
                 console.log(SelectedNum);
-                this.getOwnerComponent().getRouter().navTo("CompanyDetail", {num : SelectedNum, table: "responsive"});
+                this.getOwnerComponent().getRouter().navTo("ResCompanyDetail", {num : SelectedNum, table: "responsive"});
             }
         
       });

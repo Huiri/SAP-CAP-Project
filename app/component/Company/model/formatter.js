@@ -4,7 +4,7 @@ sap.ui.define([], function(){
         creditStatus : function (sStatus){
             switch(sStatus){
                 case "trust" :
-                    return "신뢰";
+                    return "신용";
                 case "hold" :
                     return "보류";
                 case "caution" :

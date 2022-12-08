@@ -5,19 +5,24 @@ sap.ui.define([
 ) {
 	"use strict";
     var table, argument, param;
-
+    let SelectedItem;
 	return Controller.extend("project3.controller.CompanyDetail", {
         formatter : formatter,
         onInit : async function (){
+            let layoutModel = new JSONModel({layout : false});
+            this.getView().setModel(layoutModel, "layoutModel");
+
             let editModel = new JSONModel({editable : false});
             this.getView().setModel(editModel, "editModel");
            
-            this.getOwnerComponent().getRouter().getRoute("CompanyDetail").attachPatternMatched(this.onMyRoutePatternMatched, this);
+            this.getOwnerComponent().getRouter().getRoute("ResCompanyDetail").attachPatternMatched(this.onMyRoutePatternMatched, this);
+            this.getOwnerComponent().getRouter().getRoute("GridCompanyDetail").attachPatternMatched(this.onMyRoutePatternMatched, this);
+            this.getOwnerComponent().getRouter().getRoute("CompanyDetailexpand").attachPatternMatched(this.onMyRoutePatternMatched2, this);
         },
         onMyRoutePatternMatched : async function(oEvent) {
             param = oEvent.getParameters();
             argument = oEvent.getParameter("arguments");
-            let SelectedItem = oEvent.getParameter("arguments").num;
+            SelectedItem = oEvent.getParameter("arguments").num;
             table = oEvent.getParameter("arguments").table;
             let url = "/company/Company/" + SelectedItem;
             const Company = await $.ajax({
@@ -26,13 +31,31 @@ sap.ui.define([
             })
             let CompanyModel = new JSONModel(Company);
             this.getView().setModel(CompanyModel, "CompanyModel");
-  
+
+            this.getView().getModel("layoutModel").setProperty("/layout", false);
+
+        },
+        onMyRoutePatternMatched2 : async function(oEvent) {
+            param = oEvent.getParameters();
+            argument = oEvent.getParameter("arguments");
+            SelectedItem = oEvent.getParameter("arguments").num;
+            table = oEvent.getParameter("arguments").table;
+            let url = "/company/Company/" + SelectedItem;
+            const Company = await $.ajax({
+                type : "get",
+                url : url
+            })
+            let CompanyModel = new JSONModel(Company);
+            this.getView().setModel(CompanyModel, "CompanyModel");
+
+            this.getView().getModel("layoutModel").setProperty("/layout", true);
+
         },
         toBack : function () {
             this.getView().getModel("editModel").setProperty("/editable", false);
 
             // window.history.go(-1);
-            // console.log(table);
+            console.log(table);
             // console.log(argument);
             // console.log(param);
             if(table==="grid"){
@@ -47,10 +70,9 @@ sap.ui.define([
             let oldcomname = this.byId("oldComName").getText();
             this.byId("ComName").setValue(oldcomname);
 
-            let oldcomstatus = this.byId("oldComStatus").mProperties.state;
-            if(oldcomstatus === "보류"){
-                this.byId("ComStatus").setSelectedKey("hold");
-            } else if(oldcomstatus === "주의"){
+            let oldcomstatus = this.byId("oldComStatus").getText();
+            console.log(oldcomstatus);
+            if(oldcomstatus === "주의"){
                 this.byId("ComStatus").setSelectedKey("caution");
             } else if(oldcomstatus === "신용"){
                 this.byId("ComStatus").setSelectedKey("trust");
@@ -113,7 +135,14 @@ sap.ui.define([
         },
         onClearField : function(){
             this.byId("ComName").setValue("");
-            this.byId("ComStatus").setSelectedKey("hold");
+            let selected = this.byId("oldComStatus").getText();
+            if(selected === "주의"){
+                this.byId("ComStatus").setSelectedKey("caution");
+            } else if(selected === "신용"){
+                this.byId("ComStatus").setSelectedKey("trust");
+            } else {
+                this.byId("ComStatus").setSelectedKey("hold");
+            }
             this.byId("ComPerson").setValue("");
             this.byId("ComContact").setValue("");
             this.byId("ComAddress").setValue("");
@@ -125,6 +154,25 @@ sap.ui.define([
             this.getView().getModel("editModel").setProperty("/editable", false);
 
         },
+        onfull : function(){
+            if(table === "grid"){
+                this.getOwnerComponent().getRouter().navTo("CompanyDetailexpand", {num:SelectedItem, table : "grid"});
+
+            } else if(table === "responsive"){
+                this.getOwnerComponent().getRouter().navTo("CompanyDetailexpand", {num:SelectedItem, table : "responsive"});
+
+            }
+
+        },
+        onexitfull : function(){
+            if(table === "grid"){
+                this.getOwnerComponent().getRouter().navTo("GridCompanyDetail", {num:SelectedItem, table : "grid"});
+            } else if(table === "responsive"){
+                this.getOwnerComponent().getRouter().navTo("ResCompanyDetail", {num:SelectedItem, table : "responsive"});
+
+            }
+
+        }
         
 
 	});

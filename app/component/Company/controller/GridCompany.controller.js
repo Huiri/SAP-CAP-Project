@@ -7,17 +7,17 @@ sap.ui.define(
     function(Controller, formatter, Filter, FilterOperator, Sorter, Fragment, JSONModel, MessageBox) {
       "use strict";
       var that;
-      let totalNumber;
+      let totalNumber, SelectedNum;
 
       return Controller.extend("project3.controller.GridCompany", {
         formatter : formatter,
         onInit : async function() {
             that = this;
 
-            const myRoute = this.getOwnerComponent().getRouter().getRoute("GridCompany");
-            myRoute.attachPatternMatched(this.onDataView, this);
-
+            this.getOwnerComponent().getRouter().getRoute("GridCompany").attachPatternMatched(this.onDataView, this);
+            this.getOwnerComponent().getRouter().getRoute("GridCompanyDetail").attachPatternMatched(this.onDataView,this);
         },
+
         onDataView : async function(){
             this.getView().byId("ui_table").setBusy(true);
             const Company =  await $.ajax({
@@ -41,13 +41,12 @@ sap.ui.define(
             console.log(oEvent.getParameters());
             let SelectedNum = oEvent.getParameters().row.mAggregations.cells[0].mProperties.text;
             console.log(SelectedNum);
-            this.getOwnerComponent().getRouter().navTo("CompanyDetail", {num : SelectedNum, table : "grid"});
+            this.getOwnerComponent().getRouter().navTo("GridCompanyDetail", {num : SelectedNum, table : "grid"});
             //, {변수명 : manifest route에 작성한 변수명과 일치시켜야 함}
 
         },
         onDeleteRow : async function(oEvent){
-            that = this;
-            let SelectedNum = oEvent.getParameters().row.mAggregations.cells[0].mProperties.text;
+            SelectedNum = oEvent.getParameters().row.mAggregations.cells[0].mProperties.text;
             
             this.getView().byId("ui_table").setBusy(true);
             // const Company =  await $.ajax({
@@ -137,7 +136,7 @@ sap.ui.define(
                 let CreateCompanyIndex = CreateCompany.length - 1;
                 let CreateNum = parseInt(CreateCompany[CreateCompanyIndex].comcode) + 1;
 
-                this.getOwnerComponent().getRouter().navTo("AddCompany", {num : CreateNum});
+                this.getOwnerComponent().getRouter().navTo("AddCompany", {num : CreateNum, table : "grid"});
 
             },
             onDeleteCompany : async function(){
@@ -163,18 +162,18 @@ sap.ui.define(
                 }
                 this.onDataView();
             },
-            onDelete : async function(key){
-                let url = `/company/Company/${key}`;
-                await fetch(url, {
-                    method : "DELETE",
-                    headers : {
-                        "Content-Type" : "application/json;IEEE754Compatible=true"
-                    }
-                })
-                this.getView().byId("ui_table").setBusy(false);
+            // onDelete : async function(key){
+            //     let url = `/company/Company/${key}`;
+            //     await fetch(url, {
+            //         method : "DELETE",
+            //         headers : {
+            //             "Content-Type" : "application/json;IEEE754Compatible=true"
+            //         }
+            //     })
+            //     this.getView().byId("ui_table").setBusy(false);
 
 
-            }
+            // }
         
       });
     }

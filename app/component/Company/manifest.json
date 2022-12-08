@@ -109,7 +109,7 @@
     },
     "routing": {
       "config": {
-        "routerClass": "sap.m.routing.Router",
+        "routerClass": "sap.f.routing.Router",
         "viewType": "XML",
         "async": true,
         "viewPath": "project3.view",
@@ -120,38 +120,69 @@
       "routes": [
         {
           "name": "GridCompany",
-          "pattern": "",
+          "pattern": "GridCompany",
           "target": [
             "GridCompany"
-          ]
+          ],
+          "layout" :"OneColumn"
         },
         {
           "name": "ResponsiveCompany",
           "pattern": "ResponsiveCompany",
           "target": [
             "ResponsiveCompany"
-          ]
+          ],
+          "layout" :"OneColumn"
         },
         {
           "name": "Routeapp",
           "pattern": "Routeapp",
           "target": [
             "Targetapp"
-          ]
+          ],
+          "layout" :"OneColumn"
         },
         {
           "name": "AddCompany",
-          "pattern": "AddCompany/{num}",
+          "pattern": "AddCompany/{num}/{table}",
           "target": [
             "AddCompany"
-          ]
+          ],
+          "layout" :"OneColumn"
         },
         {
-          "name": "CompanyDetail",
-          "pattern": "CompanyDetail/{num}/{table}",
+          "name": "GridCompanyDetail",
+          "pattern": "GridCompanyDetail/{num}/{table}",
+          "target": [
+            "GridCompany",
+            "CompanyDetail"
+          ],
+          "layout" :"TwoColumnsMidExpanded"
+        },
+        {
+          "name": "ResCompanyDetail",
+          "pattern": "ResCompanyDetail/{num}/{table}",
+          "target": [
+            "ResponsiveCompany",
+            "CompanyDetail"
+          ],
+          "layout" :"TwoColumnsMidExpanded"
+        },
+        {
+          "name": "CompanyDetailexpand",
+          "pattern": "CompanyDetail/{num}/{table}/expand",
           "target": [
             "CompanyDetail"
-          ]
+          ],
+          "layout" :"MidColumnFullScreen"
+        },
+        {
+          "name": "CompanyHome",
+          "pattern": "",
+          "target": [
+            "CompanyHome"
+          ],
+          "layout" :"OneColumn"
         }
         
         
@@ -162,35 +193,50 @@
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "GridCompany",
-          "viewName": "GridCompany"
+          "viewName": "GridCompany",
+          "controlAggregation": "beginColumnPages"
+
+          
         }, 
         "ResponsiveCompany": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "ResponsiveCompany",
-          "viewName": "ResponsiveCompany"
+          "viewName": "ResponsiveCompany",
+          "controlAggregation": "beginColumnPages"
         }, 
         "Targetapp": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "app",
-          "viewName": "app"
+          "viewName": "app",
+          "controlAggregation": "beginColumnPages"
         },
         "AddCompany": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "AddCompany",
-          "viewName": "AddCompany"
+          "viewName": "AddCompany",
+          "controlAggregation": "beginColumnPages"
         },
         "CompanyDetail" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "CompanyDetail",
-          "viewName": "CompanyDetail"
+          "viewName": "CompanyDetail",
+          "controlAggregation": "midColumnPages"
+        },
+        "CompanyHome" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "Company_home",
+          "viewName": "Company_home",
+          "controlAggregation": "beginColumnPages"
         }
       }
     },

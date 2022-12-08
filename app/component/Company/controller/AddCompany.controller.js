@@ -7,7 +7,7 @@ sap.ui.define([
     
     function ( Controller, JSONModel, MessageBox) {//불러온 모듈의 별칭 선언
         "use strict";
-        let Today, CreateNum;
+        let Today, CreateNum, table;
 
         return Controller.extend("project3.controller.AddCompany", { // 소괄호 안의 경로 파일을 컨트롤러로 사용하겠다는 선언
             onInit: function () {
@@ -19,6 +19,7 @@ sap.ui.define([
     
                 this.onClearField();
                 CreateNum = parseInt(oEvent.getParameter("arguments").num) + 1;
+                table = oEvent.getParameter("arguments").table;
 
                 let now = new Date();
                 Today = now.getFullYear() + "-" +(now.getMonth()+1).toString().padStart(2,'0')+"-"+now.getDate().toString().padStart(2, '0');
@@ -86,8 +87,18 @@ sap.ui.define([
             },
 
             //이전 페이지로 돌아가고 싶을 때 사용(정확히는 Request 페이지로 돌아가고 싶을 때 사용)
-            onBack : function(){
-                this.getOwnerComponent().getRouter().navTo("GridCompany");
+            onBack : function () {
+    
+                // window.history.go(-1);
+                // console.log(table);
+                // console.log(argument);
+                // console.log(param);
+                if(table==="grid"){
+                    this.getOwnerComponent().getRouter().navTo("GridCompany");
+                } else if(table === "responsive"){
+                    this.getOwnerComponent().getRouter().navTo("ResponsiveCompany");
+
+                }  
                 //getOwnerComponent : manifest||Component에 있는 정보 불러올 때 사용하는 메소드
                 //getRouter : Router의 정보를 가져오고자 할 때 사용하는 메소드
                 //navTo : navigation To의 약자, routes의 name을 통해 이동
