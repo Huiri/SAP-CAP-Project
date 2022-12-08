@@ -1,4 +1,13 @@
 sap.ui.define([
+	"sap/ui/base/ManagedObject"
+], function(
+	ManagedObject
+) {
+	"use strict";
+
+	return ManagedObject.extend("project1.index", {
+	});
+});sap.ui.define([
 
 ], function () {
     "use strict";
@@ -15,25 +24,18 @@ sap.ui.define([
     result = num1 + num2;
     document.write(`${result} <br/>`);
     result = num1 - num2;
-
     document.write(`${result} <br/>`);
     result = num1 * num2;
-
     document.write(`${result} <br/>`);
     result = num1 / num2;
-
     document.write(`${result} <br/>`);
     result = num1 % num2;
-
     document.write(`${result} <br/>`);
-
     var t1 = " 학교종이", t2="땡땡땡", t3=8282, t4="어서 모이자";
     var result;
-
     result = t1 + t2 + t3 + t4;
     document.write(`${result} <br/>`);
     document.write(`${typeof result} <br/>`);
-
     var num3 = 10, num4 = 3;
     num3 += num4;
     document.write(`${num3} <br/>`);
@@ -45,11 +47,8 @@ sap.ui.define([
     document.write(`${num3} <br/>`);
     num3 %= num4;
     document.write(`${num3} <br/>`);
-
-
     var num1 = 10;
     var num2 = 20;
-
     num1--;
     document.write(`${num1} <br/>`);
     num2++;
@@ -87,23 +86,18 @@ sap.ui.define([
     var month = prompt("현재의 월은?", "11");
     if(month >= 9 && month <= 11){
         document.write(`${month}은(는) 독서의 계절입 니다.`);
-
     } else if(month >= 6 && month <= 8){
         document.write(`${month}은(는) 여행가기 좋은 계절입니다.`);
-
     } else if(month >= 3 && month <= 5){
         document.write(`${month}은(는) 햇살 가득한  계절입니다.`);
-
     } else {
         document.write(`${month}은(는) 스키의 계절입니다.`);
-
     }
 }
 */
 /*
 {
      var num = prompt("숫자를 입력해주세요");
-
      if(num  % 6 === 0){
          document.write(`${num}은(는) 2의 배수입니다.`);
     } else if(num  % 3 === 0){
@@ -112,7 +106,6 @@ sap.ui.define([
         document.write(`<b>${num}은(는) 6의배수입니다.<b/>`);
     } else {
         document.write(`<b>${num}은(는) 2, 3, 6의  배수가 아닙니다.<b/>`);
-
    }
  }
  */
@@ -199,7 +192,6 @@ sap.ui.define([
         document.write(`i : ${i++}<br/>`);
     }
 }
-
 {
     let i = 10;
     do{
@@ -211,7 +203,6 @@ sap.ui.define([
 {
     for(a = 1; a <= 10; a++){
         document.write(`a : ${a}<br/>`);
-
     }
 }
 */
@@ -219,36 +210,28 @@ sap.ui.define([
 {
     let num = prompt("몇 단을 출력하시겠습니끼?", "2");
     document.write(`${num}단<br/>`);
-
     {
         document.write(`for문<br/>`);
         for (a = 1; a < 10; a++){
             document.write(`${num} * ${a} = ${num * a}<br/>`);
         }
-
     }
     
    
     {
         document.write(`while문<br/>`);
-
         let a = 1
         while(a < 10){
             document.write(`${num} * ${a} = ${num * a++}<br/>`);
-
     }
-
    }
     
    {
     document.write(`do-while문<br/>`);
-
     let a = 1;
     do{
         document.write(`${num} * ${a} =${num * a++}<br/>`);
-
     }while(a < 10)
-
    }
     
 }
@@ -262,7 +245,6 @@ sap.ui.define([
         }
         document.write(`${i}<br/>`);
     }
-
     document.write(`2의 배수만 출력하는 for문<br/>`);
     for(var i = 1; i <= 10; i++){
         if(i % 2 == 0){
