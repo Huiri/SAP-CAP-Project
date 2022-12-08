@@ -21,8 +21,8 @@ sap.ui.define([
             formatter:formatter, //뷰에서 사용할 메소드 명 : 직접 만든 formatter 함수
             
             onInit: async function () {
-                const myRoute = this.getOwnerComponent().getRouter().getRoute("Request");
-                myRoute.attachPatternMatched(this.onMyRoutePatternMatched, this);
+                this.getOwnerComponent().getRouter().getRoute("Request").attachPatternMatched(this.onMyRoutePatternMatched, this);
+                this.getOwnerComponent().getRouter().getRoute("RequestDetail").attachPatternMatched(this.onMyRoutePatternMatched, this);
             },
             onMyRoutePatternMatched :async function(){
                 this.onDataView();
@@ -278,9 +278,12 @@ sap.ui.define([
                 
             },
 
-		alert: function(oEvent) {
-			
-		},
+            alert: function(oEvent) {
+                
+            },
+            onRequesthome : function(){
+                this.getOwnerComponent().getRouter().navTo("RequestHome")
+            }
             	
     
         });

@@ -1,0 +1,19 @@
+sap.ui.define([
+	"sap/ui/core/mvc/Controller"
+], function(
+	Controller
+) {
+	"use strict";
+
+	return Controller.extend("project2.controller.Request_home", {
+        onInit() {
+
+        },
+        onRequest_list : function(){
+            this.getOwnerComponent().getRouter().navTo("Request");
+        },
+        onPress : function(){
+
+        }
+ 	});
+});

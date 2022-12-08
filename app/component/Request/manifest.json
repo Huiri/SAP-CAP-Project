@@ -95,7 +95,7 @@
     },
     "routing": {
       "config": {
-        "routerClass": "sap.m.routing.Router",
+        "routerClass": "sap.f.routing.Router",
         "viewType": "XML",
         "async": true,
         "viewPath": "project2.view",
@@ -109,28 +109,51 @@
           "pattern": "Routeapp",
           "target": [
             "Targetapp"
-          ]
+          ],
+          "layout" :"OneColumn"
         },
         {
           "name": "Request",
-          "pattern": "",
+          "pattern": "Request",
           "target": [
             "Request"
-          ]
+          ],
+          "layout" :"OneColumn"
         },
         {
           "name" : "CreateOrder",
           "pattern": "CreateOrder/{num}",
           "target" : [
             "CreateOrder"
-          ]
+          ],
+          "layout" :"OneColumn"
         },
         {
           "name": "RequestDetail",
-          "pattern": "RequestDetail/{num}/{table}",
+          "pattern": "RequestDetail/{num}/",
+          "target": [
+            "Request",
+            "RequestDetail"
+          ],
+          "layout" :"TwoColumnsMidExpanded"
+
+        },
+        {
+          "name": "RequestDetailexpand",
+          "pattern": "RequestDetail/{num}/expand",
           "target": [
             "RequestDetail"
-          ]
+          ],
+          "layout" :"MidColumnFullScreen"
+
+        },
+        {
+          "name": "RequestHome",
+          "pattern": "",
+          "target": [
+            "RequestHome"
+          ],
+          "layout" :"OneColumn"
         }
         
         
@@ -141,28 +164,40 @@
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "Request",
-          "viewName": "Request"
+          "viewName": "Request",
+          "controlAggregation": "beginColumnPages"
         }, 
         "CreateOrder" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "CreateOrder",
-          "viewName": "CreateOrder"
+          "viewName": "CreateOrder",
+          "controlAggregation": "beginColumnPages"
         },
         "Targetapp": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "app",
-          "viewName": "app"
+          "viewName": "app",
+          "controlAggregation": "beginColumnPages"
         },
         "RequestDetail" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "RequestDetail",
-          "viewName": "RequestDetail"
+          "viewName": "RequestDetail",
+          "controlAggregation": "midColumnPages"
+        },
+        "RequestHome" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "Request_home",
+          "viewName": "Request_home",
+          "controlAggregation": "beginColumnPages"
         }
       }
     },

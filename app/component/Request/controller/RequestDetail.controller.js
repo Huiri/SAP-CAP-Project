@@ -6,22 +6,26 @@ sap.ui.define(
     ],
     function(Controller, JSONModel, formatter) {
       "use strict";
-      var table;
+      var SelectedNum;
       return Controller.extend("project2.controller.RequestDetail", {
         formatter: formatter,
         
         onInit : function() {
+          let layoutModel = new JSONModel({layout : false});
+          this.getView().setModel(layoutModel, "layoutModel");
+
           let visibleModel = new JSONModel({footer : false, reject : false});
           this.getView().setModel(visibleModel, "visibleMode");
+
           this.getOwnerComponent().getRouter().getRoute("RequestDetail").attachPatternMatched(this.onMyRoutePatternMatched, this);
+          this.getOwnerComponent().getRouter().getRoute("RequestDetailexpand").attachPatternMatched(this.onMyRoutePatternMatched2, this);
         },
         onBeforeRendering(){
           this.getView().getModel("visibleMode").setProperty("/footer",false);
         },
         onMyRoutePatternMatched : async function (oEvent){
           this.getView().getModel("visibleMode").setProperty("/footer",false);
-          let SelectedNum = oEvent.getParameter("arguments").num;
-          table = oEvent.getParameter("arguments").table;
+          SelectedNum = oEvent.getParameter("arguments").num;
           //설정해놓은 변수값 가져오기
           //manifest에서 선언한 변수를 가져오겠다 -> arguments
           let url = "/request/Request/" + SelectedNum;
@@ -33,7 +37,28 @@ sap.ui.define(
           this.getView().setModel(RequestModel, "RequestModel");
 
           
-          console.log(RequestModel.oData.request_state);
+          if(RequestModel.oData.request_state === 'B'){
+            this.getView().getModel("visibleMode").setProperty("/footer",true);
+            // visibleModel.oData.footer = true;
+          } else if(RequestModel.oData.request_state === 'C'){
+            this.getView().getModel("visibleMode").setProperty("/reject",false);
+            // visibleModel.oData.reject = true;
+          }
+          
+          this.getView().getModel("layoutModel").setProperty("/layout", false);
+        },
+        onMyRoutePatternMatched2 : async function (oEvent){
+          this.getView().getModel("visibleMode").setProperty("/footer",false);
+          SelectedNum = oEvent.getParameter("arguments").num;
+          let url = "/request/Request/" + SelectedNum;
+          const Request = await $.ajax({
+            type:"get",
+            url : url
+          });
+          let RequestModel = new JSONModel(Request);
+          this.getView().setModel(RequestModel, "RequestModel");
+
+          
           if(RequestModel.oData.request_state === 'B'){
             this.getView().getModel("visibleMode").setProperty("/footer",true);
             // visibleModel.oData.footer = true;
@@ -41,13 +66,12 @@ sap.ui.define(
             // this.getView().getModel("visibleMode").setProperty("/footer",false);
             visibleModel.oData.reject = true;
           }
-          
+
+          this.getView().getModel("layoutModel").setProperty("/layout", true);
         },
         
         onBack : function () {
-          if(table=="grid"){
             this.getOwnerComponent().getRouter().navTo("Request");
-          }
         },
         onApprove : async function(){
           let temp = new JSONModel().oData;
@@ -104,6 +128,14 @@ sap.ui.define(
           this.byId("RejectReason").setValue("");
           this.byId("OrderRejectDialog").destroy();
           this.pDialog = null;
+
+        },
+        onfull : function(){
+          this.getOwnerComponent().getRouter().navTo("RequestDetailexpand", {num:SelectedNum});
+
+        },
+        onexitfull : function(){
+          this.getOwnerComponent().getRouter().navTo("RequestDetail", {num:SelectedNum});
 
         }
         
