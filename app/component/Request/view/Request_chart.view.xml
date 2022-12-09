@@ -1,0 +1,65 @@
+<mvc:View
+	controllerName="project2.controller.Request_chart"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:micro="sap.suite.ui.microchart"
+    xmlns:card="sap.f.cards"
+	height="100%">
+<f:DynamicPage id="RequestPage">
+    <f:title>
+        <f:DynamicPageTitle id="_IDGenDynamicPageTitle1" >
+            <f:heading>
+                <HBox id="_IDGenHBox1">
+                    <Button id="_IDGenButton1" icon ="sap-icon://nav-back" press=".onRequesthome" type="Transparent"/>
+                    <Title id="_IDGenTitle1" text="물품 요청 현황"/>
+                </HBox>
+            </f:heading>
+        </f:DynamicPageTitle>
+    </f:title>
+    <f:content class="sapUiSmallMargin">
+        <grid:CSSGrid id="_IDGenCSSGrid1" class="cssgridpadding">
+            <grid:customLayout>
+                <grid:ResponsiveColumnLayout id="_IDGenResponsiveColumnLayout1" />
+            </grid:customLayout>
+            <f:Card id="_IDGenCard1" class="sapUiMediumMarginBeginEnd sapUiTinyMarginTop">
+                <f:header>
+                    <card:Header id="_IDGenHeader1" title="이번 달 물품 요청 처리 현황" iconSrc="sap-icon://donut-chart" />
+                </f:header>
+                <f:content>
+                    <micro:InteractiveDonutChart id="_IDGenInteractiveDonutChart1" class="sapUiMediumMarginTop" displayedSegments="3">
+                        <micro:segments>
+                            <micro:InteractiveDonutChartSegment id="_IDGenInteractiveDonutChartSegment1" label="승인" value="{state>/approve}" displayedValue="{state>/approvepercent}" />
+                            <micro:InteractiveDonutChartSegment id="_IDGenInteractiveDonutChartSegment2" label="처리 대기" value="{state>/wait}" displayedValue="{state>/waitpercent}" />
+                            <micro:InteractiveDonutChartSegment id="_IDGenInteractiveDonutChartSegment3" label="반려" value="{state>/reject}" displayedValue="{state>/rejectpercent}" />
+                        </micro:segments>
+                    </micro:InteractiveDonutChart>
+                </f:content>
+                <f:layoutData>
+                    <grid:ResponsiveColumnItemLayoutData id="_IDGenResponsiveColumnItemLayoutData1" columns="7" rows="1" />
+                </f:layoutData>
+            </f:Card>
+            <f:Card id="_IDGenCard2" class="sapUiMediumMarginBeginEnd sapUiTinyMarginTop">
+                <f:header>
+                    <card:Header id="_IDGenHeader2" title="이번 달 물품 요청 처리 현황" iconSrc="sap-icon://bar-chart" />
+                </f:header>
+                <f:content>
+                    <micro:ColumnMicroChart id="_IDGenColumnMicroChart1" size="L" class="sapUiSmallMargin">
+                        <micro:columns>
+                            <micro:ColumnMicroChartData id="_IDGenColumnMicroChartData1" label="승인" value="{state>/approve}" color="Good"/>
+                            <micro:ColumnMicroChartData id="_IDGenColumnMicroChartData5" label="처리 대기" value="{state>/wait}" color="Neutral"/>
+                            <micro:ColumnMicroChartData id="_IDGenColumnMicroChartData6" label="반려" value="{state>/reject}" color="Error"/>
+                        </micro:columns>
+                    </micro:ColumnMicroChart>
+                </f:content>
+                <f:layoutData>
+                    <grid:ResponsiveColumnItemLayoutData id="_IDGenResponsiveColumnItemLayoutData2" columns="7" rows="1" />
+                </f:layoutData>
+
+            </f:Card>
+        </grid:CSSGrid>
+    </f:content>
+</f:DynamicPage>
+</mvc:View>

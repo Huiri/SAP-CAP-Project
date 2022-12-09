@@ -2,7 +2,8 @@
 	controllerName="project2.controller.Request_home"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
-	xmlns:c="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:card="sap.f.cards"
 	displayBlock="true"
 	height="100%"
 	busyIndicatorDelay="0"
@@ -21,12 +22,14 @@
                     <ImageContent id="_IDGenImageContent1" src="sap-icon://survey"/>
                 </TileContent>
             </GenericTile>
-            <GenericTile id="_IDGenGenericTile2" class="sapUiTinyMarginBegin sapUiTinyMarginTop">
-                <TileContent id="_IDGenTileContent2" >
-                    <ImageContent id="_IDGenImageContent2" src="sap-icon://bar-chart"/>
+            <GenericTile id="_IDGenGenericTile5" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+                header="물품 요청 현황"
+                press=".onRequest_state">
+                <TileContent id="_IDGenTileContent3" >
+                    <ImageContent id="_IDGenImageContent3" src="sap-icon://bar-chart"/>
                 </TileContent>
             </GenericTile>
-              <SlideTile id="_IDGenSlideTile1" class="sapUiTinyMarginBegin sapUiTinyMarginTop" transitionTime="250" displayTime="2500">
+            <SlideTile id="_IDGenSlideTile1" class="sapUiTinyMarginBegin sapUiTinyMarginTop" transitionTime="250" displayTime="2500">
                 <GenericTile id="_IDGenGenericTile3"
                         backgroundImage="https://cdn.discordapp.com/attachments/1049602250919657475/1050259976360304650/IMG_4523.jpg"
                         frameType="TwoByOne" press="onPress">
@@ -36,6 +39,56 @@
                         frameType="TwoByOne">
                 </GenericTile>
             </SlideTile>
+            <HBox id="_IDGenHBox2" width="100%" height="3rem"/>
+            <HBox id="_IDGenHBox3" width="100%">
+                <Title id="_IDGenTitle2" text="물품 요청 Overview"/>
+            </HBox>
+            <f:Card id="_IDGenCard1" class="sapUiSmallMargin" width="300px">
+                <f:header>
+                    <card:Header id="_IDGenHeader10" title="물품 요청 대기 목록" subtitle="3개의 최신 처리 대기 데이터"/>
+                </f:header>
+                <f:content>
+                    <List id="_IDGenList1" showSeparators="None" items="{
+                        path : 'RecentRequestModel>/'}">
+                        <CustomListItem type="Active" press=".onNavToDetail" id="_IDGenCustomListItem1">
+                            <HBox id="_IDGenHBox4" alignItems="Center" justifyContent="SpaceBetween">
+                                <VBox id="_IDGenVBox1" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
+                                    <Title id="_IDGenTitle3" level="H3" text="{RecentRequestModel>request_product}"/>
+                                    <Text id="_IDGenText1" text="{RecentRequestModel>requestor}"/>
+                                </VBox>
+                                <ObjectStatus id="_IDGenObjectStatus1" class="sapUiTinyMargin sapUiSmallMarginEnd" text="{
+                                    path: 'RecentRequestModel>request_state',
+                                    formatter : '.formatter.statusText'}"
+                                    state="None"/>
+                            </HBox>
+                        </CustomListItem>
+                    </List>
+                </f:content>
+            </f:Card>
+            <f:Card id="_IDGenCard2" class="sapUiSmallMargin" width="300px">
+                <f:header>
+                    <card:Header id="_IDGenHeader20" title="물품 요청 집계 목록" subtitle="물품 요청 상태별 집계 상태"/>
+                </f:header>
+                <f:content>
+                    <List id="_IDGenList2" showSeparators="None" items="{
+                        path : 'StatusRequestModel>/'}">
+                        <CustomListItem id="_IDGenCustomListItem2">
+                            <HBox id="_IDGenHBox5" alignItems="Center" justifyContent="SpaceBetween">
+                                <VBox id="_IDGenVBox2" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
+                                    <ObjectStatus id="_IDGenObjectStatus2" class="sapUiTinyMargin sapUiSmallMarginEnd" text="{
+                                    path: 'StatusRequestModel>request_state',
+                                    formatter : '.formatter.statusText'}"
+                                    state = "{=${StatusRequestModel>request_state} === 'A' ? 'Success' : ${StatusRequestModel>request_state}  === 'B' ? 'None' : 'Error'}"/>    
+                                    <!-- <Title id="_IDGenTitle4" level="H3" text="{StatusRequestModel>request_state}"/> -->
+                                </VBox>
+                                <Text id="_IDGenText3" class="sapUiTinyMargin sapUiSmallMarginEnd"
+                                    text="{StatusRequestModel>total}"/>
+                            </HBox>
+                        </CustomListItem>
+                    </List>
+                </f:content>
+            </f:Card>
+
         </content>
     </Panel>
 
