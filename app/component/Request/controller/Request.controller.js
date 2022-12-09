@@ -2,7 +2,7 @@ sap.ui.define([
     'sap/ui/core/mvc/Controller', "sap/m/MessageToast",
     "../model/formatter", "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator", "sap/ui/model/Sorter", "sap/ui/core/Fragment",
-    "sap/ui/model/json/JSONModel",
+    "sap/ui/model/json/JSONModel", "sap/ui/export/Spreadsheet", "sap/ui/export/library"
 ],//사용할 모듈 선언
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -14,9 +14,13 @@ sap.ui.define([
 	FilterOperator,
 	Sorter,
 	Fragment,
-    JSONModel) {//사용할 모듈의 별칭 선언(순서 맞춰 주어야 오류 발생 X)
+    JSONModel,
+    Spreadsheet,
+    exportLibrary) {//사용할 모듈의 별칭 선언(순서 맞춰 주어야 오류 발생 X)
         "use strict";
         let totalNumber;
+        const EdmType = exportLibrary.EdmType;
+
         return Controller.extend("project2.controller.Request", { // 소괄호 안의 경로 파일을 컨트롤러로 사용하겠다는 선언
             formatter:formatter, //뷰에서 사용할 메소드 명 : 직접 만든 formatter 함수
             
@@ -67,6 +71,79 @@ sap.ui.define([
                 this.getView().byId("TableName").setText(TableIndex); 
 
             },
+            onDataExport: function () {
+                let aCols, oRowBinding, oSettings, oSheet, oTable;
+                oTable = this.byId('ui_table');
+                oRowBinding = oTable.getBinding('rows');
+                aCols = this.createColumnConfig();
+    
+                let oList =[]; //필터링 된 값을 받기 위한 배열 선언
+                for(let j = 0; j < oRowBinding.oList.length; j++){
+                    if(oRowBinding.aIndices.indexOf(j) > -1){
+                        oList.push(oRowBinding.oList[j]);
+                    }
+                }
+                for(let i = 0; i < oList.length; i++){
+                    if(oList[i].request_state === 'A'){
+                        oList[i].request_state2 = "승인";
+                    }
+                    if(oList[i].request_state === 'B'){
+                        oList[i].request_state2 = "처리 대기";
+                    }
+                    if(oList[i].request_state === 'C'){
+                        oList[i].request_state2 = "반려";
+                    }
+                }
+
+    
+                oSettings = {
+                    workbook: {
+                        columns: aCols,
+                        hierarchyLevel: 'Level'
+                    },
+                    dataSource: oList,
+                    fileName: 'RequestTable.xlsx',
+                    worker: false
+                };
+                oSheet = new Spreadsheet(oSettings);
+                oSheet.build().finally(function () {
+                    oSheet.destroy();
+                });
+            },
+            createColumnConfig : function(){
+                const aCols = [];
+                aCols.push({
+                    label : "요청 번호",
+                    property : "request_number",
+                    type : EdmType.String
+                });
+                aCols.push({
+                    label : "요청 물품",
+                    property : "request_product",
+                    type : EdmType.String
+                });
+                aCols.push({
+                    label : "물품 개수",
+                    property : "request_quantity",
+                    type : EdmType.Int32
+                });
+                aCols.push({
+                    label : "요청자",
+                    property : "requestor",
+                    type : EdmType.String
+                });
+                aCols.push({
+                    label : "요청 일자",
+                    property : "request_date",
+                    type : EdmType.String
+                });
+                aCols.push({
+                    label : "처리 상태",
+                    property : "request_state2",
+                    type : EdmType.String
+                });
+                return aCols;
+            },
             onCreateOrder : function(){
                 let CreateOrder = this.getView().getModel("RequestModel").oData;
                 let CreateOrderIndex = CreateOrder.length - 1;
@@ -76,24 +153,11 @@ sap.ui.define([
             onNavToDetail : function(oEvent) {
                 let SelectedNum = oEvent.getParameters().row.mAggregations.cells[1].mProperties.text;
                 console.log(SelectedNum);
-                this.getOwnerComponent().getRouter().navTo("RequestDetail", {num : SelectedNum,table:"grid"});
+                this.getOwnerComponent().getRouter().navTo("RequestDetail", {num : SelectedNum,table:"grid", where:" "});
                 //, {변수명 : manifest route에 작성한 변수명과 일치시켜야 함}
 
             },
 
-            onDeleteOrd : async function(){
-
-                let model= this.getView().getModel("RequestModel");
-                for(let i = 0; i < totalNumber; i++){
-                    let chk = `/${i}/CHK`;
-                    if(model.getProperty(chk) === true){
-                        let key =`/${i}/request_number`;
-                        let request_number = model.getProperty(key);
-                        await this.onDelete(request_number);
-                    }
-                }
-                this.onDataView();
-            },
             onDelete : async function(key) {
                 let url = `/request/Request/${key}`;
                 await fetch(url, {
@@ -274,8 +338,18 @@ sap.ui.define([
             clearSelection: function(evt) {
                 this.byId("ui_table").clearSelection();
             },
-            onDeleteOrder : function(){
-                
+            onDeleteOrder : async function(){
+                let model= this.getView().getModel("RequestModel");
+                for(let i = 0; i < totalNumber; i++){
+                    let chk = `/${i}/CHK`;
+                    if(model.getProperty(chk) === true){
+                        let key =`/${i}/request_number`;
+                        let request_number = model.getProperty(key);
+                        await this.onDelete(request_number);
+                    }
+                }
+                this.onDataView();
+
             },
 
             alert: function(oEvent) {

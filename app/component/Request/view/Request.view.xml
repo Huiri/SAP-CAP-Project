@@ -197,12 +197,17 @@
                                     id="_IDGenButton0"
                                     tooltip="삭제"
                                     icon="sap-icon://delete"
-                                    press=".onDeleteOrd"
+                                    press=".onDeleteOrder"
                                     type="Transparent"/>
                                 <Button id="_IDGenButton8"
                                     icon="sap-icon://sort"
                                     tooltip="정렬"
                                     press=".onSort" 
+                                    type="Transparent"/>
+                                <Button id="_IDGenButton19"
+                                    icon="sap-icon://excel-attachment"
+                                    tooltip="Excel Download"
+                                    press=".onDataExport" 
                                     type="Transparent"/>
                                     <!-- press : 버튼 눌렀을 때 어떤 함수를 호출할 지 -->
                                     <!-- tooltip : 버튼에 마우스 hover 시 표시해줄 값 선언, 버튼 용도 설명용  -->
