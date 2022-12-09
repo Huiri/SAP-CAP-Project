@@ -6,7 +6,7 @@ sap.ui.define(
     ],
     function(Controller, JSONModel, formatter) {
       "use strict";
-      var SelectedNum;
+      var SelectedNum, FromWhere;
       return Controller.extend("project2.controller.RequestDetail", {
         formatter: formatter,
         
@@ -26,6 +26,7 @@ sap.ui.define(
         onMyRoutePatternMatched : async function (oEvent){
           this.getView().getModel("visibleMode").setProperty("/footer",false);
           SelectedNum = oEvent.getParameter("arguments").num;
+          FromWhere = oEvent.getParameter("arguments").where;
           //설정해놓은 변수값 가져오기
           //manifest에서 선언한 변수를 가져오겠다 -> arguments
           let url = "/request/Request/" + SelectedNum;
@@ -50,6 +51,8 @@ sap.ui.define(
         onMyRoutePatternMatched2 : async function (oEvent){
           this.getView().getModel("visibleMode").setProperty("/footer",false);
           SelectedNum = oEvent.getParameter("arguments").num;
+          FromWhere = oEvent.getParameter("arguments").where;
+
           let url = "/request/Request/" + SelectedNum;
           const Request = await $.ajax({
             type:"get",
@@ -71,7 +74,12 @@ sap.ui.define(
         },
         
         onBack : function () {
-            this.getOwnerComponent().getRouter().navTo("Request");
+            console.log(FromWhere);
+            if(FromWhere === "home"){
+              this.getOwnerComponent().getRouter().navTo("RequestHome");
+            } else if(FromWhere === "detail" || FromWhere === " ") {
+              this.getOwnerComponent().getRouter().navTo("Request");
+            }
         },
         onApprove : async function(){
           let temp = new JSONModel().oData;
@@ -131,11 +139,11 @@ sap.ui.define(
 
         },
         onfull : function(){
-          this.getOwnerComponent().getRouter().navTo("RequestDetailexpand", {num:SelectedNum});
+          this.getOwnerComponent().getRouter().navTo("RequestDetailexpand", {num:SelectedNum, where : FromWhere});
 
         },
         onexitfull : function(){
-          this.getOwnerComponent().getRouter().navTo("RequestDetail", {num:SelectedNum});
+          this.getOwnerComponent().getRouter().navTo("RequestDetail", {num:SelectedNum, where : FromWhere});
 
         }
         

@@ -130,7 +130,7 @@
         },
         {
           "name": "RequestDetail",
-          "pattern": "RequestDetail/{num}/",
+          "pattern": "RequestDetail/{num}/{where}",
           "target": [
             "Request",
             "RequestDetail"
@@ -140,7 +140,7 @@
         },
         {
           "name": "RequestDetailexpand",
-          "pattern": "RequestDetail/{num}/expand",
+          "pattern": "RequestDetail/{num}/{where}/expand",
           "target": [
             "RequestDetail"
           ],
@@ -152,6 +152,14 @@
           "pattern": "",
           "target": [
             "RequestHome"
+          ],
+          "layout" :"OneColumn"
+        },
+        {
+          "name": "RequestChart",
+          "pattern": "RequestChart",
+          "target": [
+            "RequestChart"
           ],
           "layout" :"OneColumn"
         }
@@ -198,6 +206,15 @@
           "viewId": "Request_home",
           "viewName": "Request_home",
           "controlAggregation": "beginColumnPages"
+        },
+        "RequestChart" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "Request_chart",
+          "viewName": "Request_chart",
+          "controlAggregation": "beginColumnPages"
+
         }
       }
     },

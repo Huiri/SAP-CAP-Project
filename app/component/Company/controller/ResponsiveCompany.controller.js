@@ -8,7 +8,7 @@ sap.ui.define(
     function(Controller, formatter, Filter, FilterOperator, Sorter, Fragment, JSONModel, MessageBox) {
       "use strict";
       var that;
-      let totalNumber;
+      let totalNumber, SelectedNum;
 
       return Controller.extend("project3.controller.ResponsiveCompany", {
         formatter : formatter,
@@ -123,6 +123,10 @@ sap.ui.define(
                     console.log(oItems);
                     for(var i = 0 ;i < oItems.length; i++){
                         var selected = oItems[i].mAggregations.cells[0].mProperties.text;
+                        if(SelectedNum === selected) {
+                            sap.ui.controller("project3.controller.CompanyDetail").toBack();
+                        }    
+
                         await this.onDelete(selected);
 
                     }
@@ -149,7 +153,7 @@ sap.ui.define(
             toDetailPage : function(oEvent) {
                 console.log(oEvent.getSource());
                 console.log(oEvent.getParameters());
-                let SelectedNum = oEvent.getSource().mAggregations.cells[0].mProperties.text;
+                SelectedNum = oEvent.getSource().mAggregations.cells[0].mProperties.text;
                 console.log(SelectedNum);
                 this.getOwnerComponent().getRouter().navTo("ResCompanyDetail", {num : SelectedNum, table: "responsive"});
             }

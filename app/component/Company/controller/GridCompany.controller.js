@@ -157,23 +157,25 @@ sap.ui.define(
                 for(let i = 0; i < sMsg.length; i++){
                     var index = "/"+sMsg[i] + "/comcode";
                     var comcode = model.getProperty(index);
-                    console.log(comcode);
+                    if(SelectedNum === comcode) {
+                        sap.ui.controller("project3.controller.CompanyDetail").toBack();
+                    }
                     await this.onDelete(comcode);
                 }
                 this.onDataView();
             },
-            // onDelete : async function(key){
-            //     let url = `/company/Company/${key}`;
-            //     await fetch(url, {
-            //         method : "DELETE",
-            //         headers : {
-            //             "Content-Type" : "application/json;IEEE754Compatible=true"
-            //         }
-            //     })
-            //     this.getView().byId("ui_table").setBusy(false);
+            onDelete : async function(key){
+                let url = `/company/Company/${key}`;
+                await fetch(url, {
+                    method : "DELETE",
+                    headers : {
+                        "Content-Type" : "application/json;IEEE754Compatible=true"
+                    }
+                })
+                this.getView().byId("ui_table").setBusy(false);
 
 
-            // }
+            }
         
       });
     }
