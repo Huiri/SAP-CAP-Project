@@ -6,7 +6,7 @@
                     <HBox id="_IDGenHBox5" >
                         <Button id="_IDGenButton0" press=".onBack" type="Back" tooltip="요청 목록 화면으로 돌아가기" />
 
-                        <Title id="_IDGenTitle4" text="협력 업체 상세"/>
+                        <Title id="_IDGenTitle4" text="물품 요청 상세"/>
                     </HBox>
                 </f:heading>
                 <f:navigationActions>
