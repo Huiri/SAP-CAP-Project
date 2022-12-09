@@ -1,5 +1,5 @@
 {
-  "welcomeFile" : "/app/webapp/index.html",
+  "welcomeFile": "/app/webapp/index.html",
   "authenticationMethod": "none",
   "routes": [
     {
