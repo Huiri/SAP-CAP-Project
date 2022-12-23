@@ -17,7 +17,16 @@ sap.ui.define(
         toMaterial : function(){
           this.getOwnerComponent().getRouter().navTo("GridMaterial");
 
-        }
+        },
+        toHome : function(){
+          this.getOwnerComponent().getRouter().navTo("Home");
+
+        },
+
+		toSnack: function() {
+      this.getOwnerComponent().getRouter().navTo("Snack");
+
+		}
       });
     }
   );
