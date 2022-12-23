@@ -1,0 +1,48 @@
+<mvc:View
+	controllerName="project5.controller.SnackChart"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:micro="sap.suite.ui.microchart"
+    xmlns:card="sap.f.cards"
+	height="100%">
+<f:DynamicPage id="RequestPage">
+    <f:title>
+        <f:DynamicPageTitle id="_IDGenDynamicPageTitle1" >
+            <f:heading>
+                <HBox >
+                    <Button press=".toSnackthome" type="Back"/>
+                    <Title text="간식 요청 현황"/>
+                </HBox>
+            </f:heading>
+        </f:DynamicPageTitle>
+    </f:title>
+    <f:content>
+        <grid:CSSGrid class="cssgridpadding">
+            <grid:customLayout>
+                <grid:ResponsiveColumnLayout />
+            </grid:customLayout>
+            <f:Card  class="sapUiMediumMarginBeginEnd sapUiTinyMarginTop">
+                <f:header>
+                    <card:Header title="카테고리 별 현황" iconSrc="sap-icon://bar-chart" />
+                </f:header>
+
+                <f:content>
+                    <micro:InteractiveDonutChart  class="sapUiMediumMarginTop" >
+                        <micro:segments>
+                            <micro:InteractiveDonutChartSegment  label="음료" value="{state>/beverage}" displayedValue="{state>/beveragepercent}" />
+                            <micro:InteractiveDonutChartSegment  label="과자" value="{state>/snack}" displayedValue="{state>/snackpercent}" />
+                            <micro:InteractiveDonutChartSegment  label="기타" value="{state>/etc}" displayedValue="{state>/etcpercent}" />
+                        </micro:segments>
+                    </micro:InteractiveDonutChart>
+                </f:content>
+                <f:layoutData>
+                    <grid:ResponsiveColumnItemLayoutData columns="7" />
+                </f:layoutData>
+            </f:Card>
+        </grid:CSSGrid>
+    </f:content>
+</f:DynamicPage>
+</mvc:View>

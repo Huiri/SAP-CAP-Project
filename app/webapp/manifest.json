@@ -54,7 +54,7 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.102.1",
       "libs": {
@@ -83,6 +83,12 @@
       },
       "productComponent" : {
         "name" : "project4",
+        "settings" : {},
+        "componentData" : {},
+        "lazy" : true
+      },
+      "snackComponent" : {
+        "name" : "project5",
         "settings" : {},
         "componentData" : {},
         "lazy" : true
@@ -168,6 +174,14 @@
             "name" : "Request",
             "prefix": "Request"
           }
+        },
+        {
+          "name": "Snack",
+          "pattern": "Snack",
+          "target": {
+            "name" : "Snack",
+            "prefix": "Snack"
+          }
         }
         
         
@@ -200,6 +214,13 @@
           "usage" : "requestComponent",
           "clearControlAggregation": true,
           "title" : "Request"
+        }, 
+        "Snack": {
+          "type" : "Component",
+          "transition": "slide",
+          "usage" : "snackComponent",
+          "clearControlAggregation": true,
+          "title" : "Snack"
         }
       }
     },

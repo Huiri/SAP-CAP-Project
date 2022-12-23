@@ -30,8 +30,8 @@ sap.ui.define([
             },
             onMyRoutePatternMatched :async function(oEvent){
                 SelectedState = oEvent.getParameter("arguments").status;
-                if(SelectedState=='%20'){
-                    SelectedState=''
+                if(SelectedState=='table'){
+                    SelectedState=null;
                 }
                 await this.onDataView();
                 this.byId("ReqStatus").setSelectedKey(SelectedState);

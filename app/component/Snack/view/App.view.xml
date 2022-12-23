@@ -1,0 +1,17 @@
+<!-- XML, HTML, JS, JSON 지원, XMLView 추천 -->
+
+<mvc:View controllerName="project5.controller.App"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    height = "100%">
+    <!-- sap sdk : toolpage layout -->
+    <App id="myApp">
+        <f:FlexibleColumnLayout
+            autoFocus="false" restoreFocusOnBackNavigation="true"
+            backgroundDesign="Translucent" id="app"
+        />
+    <!-- id="app"은 manifest의 routing의 controlId값으로 연동 -->
+    </App>
+</mvc:View>

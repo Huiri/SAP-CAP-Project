@@ -1,0 +1,59 @@
+{
+    "SelectedStatus" : "",
+    "SnackCategory": [
+        {
+            "Category": "",
+            "Value": "전체"
+        },
+        {
+            "Category": "B",
+            "Value": "음료"
+        },
+        {
+            "Category": "S",
+            "Value": "과자"
+        },
+        {
+            "Category": "X",
+            "Value": "기타"
+        }
+        
+    ],
+    "createCategory": [
+        {
+            "Category": "B",
+            "Value": "음료"
+        },
+        {
+            "Category": "S",
+            "Value": "과자"
+        },
+        {
+            "Category": "X",
+            "Value": "기타"
+        }
+        
+    ],
+    "SnackStatus": [
+        {
+            "QuantStatus": "",
+            "Value": "전체"
+        },
+        {
+            "QuantStatus": "A",
+            "Value": "많음"
+        },
+        {
+            "QuantStatus": "B",
+            "Value": "보통"
+        },
+        {
+            "QuantStatus": "C",
+            "Value": "적음"
+        }
+        
+    ]
+
+
+
+}

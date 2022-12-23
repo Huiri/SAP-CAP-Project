@@ -1,0 +1,202 @@
+<mvc:View 
+    controllerName="project5.controller.SnackList"
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:f="sap.f"
+    displayBlock="true"
+    xmlns:t="sap.ui.table"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+    xmlns="sap.m">
+    <f:DynamicPage  id="RequestPage">
+        <f:title>
+            <f:DynamicPageTitle id="_IDGenDynamicPageTitle1">
+                <f:heading>
+                    <HBox id="_IDGenHBox1">
+                        <Button id="_IDGenButton9"
+                            icon="sap-icon://nav-back"
+                            press=".toSnackHome"
+                            type="Transparent"/>
+
+                        <Title id="_IDGenTitle1" text="간식 목록"/>
+                    </HBox>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader >
+                <form:SimpleForm  layout="ResponsiveGridLayout">
+                    <form:content>
+                        <VBox>
+                            <Label text="간식 이름 :"/>
+                            <Input id="snackTitle"/>
+                            <layoutData>
+                                <layout:GridData  span="XL2 L2 M6 S12"/>
+                            </layoutData>
+                        </VBox>
+
+                        <VBox >
+                            <Label id="_IDGenLabel8" text="간식 카테고리 :"/>
+                            <Select id="snackCategory" width="100%"
+                                items="{SelectOption>/SnackCategory}">
+                                <core:Item key="{SelectOption>Category}" text="{SelectOption>Value}" />
+                    
+                            </Select>
+                            <layoutData>
+                                <layout:GridData span="XL2 L2 M6 S12"/>
+                            </layoutData>
+                        </VBox>
+                        <VBox>
+                            <Label text="재고 상태 :"/>
+                            <Select id="snackStatus" width="100%"
+                                items="{SelectOption>/SnackStatus}">
+                                <core:Item key="{SelectOption>QuantStatus}" text="{SelectOption>Value}" />
+                    
+                            </Select>
+
+                            <layoutData>
+                                <layout:GridData span="XL2 L2 M6 S12"/>
+                            </layoutData>
+                        </VBox>
+                        <VBox>
+                            <Label text="재고 신청일 :"/>
+                            <DatePicker id="snackReqDate"
+                                        displayFormat="yyyy-MM-dd"
+                                        valueFormat="yyyy-MM-dd"/>
+                            <layoutData>
+                                <layout:GridData span="XL2 L2 M6 S12"/>
+                            </layoutData>
+                        </VBox>
+                        
+                        <VBox>
+                            <Label text="선호도 :"/>
+                            <Input id="snackPrefer"/>
+                            <layoutData>
+                                <layout:GridData id="_IDGenGridData5" span="XL2 L2 M6 S12"/>
+                            </layoutData>
+                        </VBox>
+                        <FlexBox  justifyContent="End">
+                            <Button text="검색" type="Emphasized" press=".onSearch"/>
+                            <Button text="초기화" type="Transparent" press=".onReset" class="sapUiTinyMarginBegin"/>
+                            <layoutData>
+                                <layout:GridData id="_IDGenGridData7"  span="XL12 L12 M12 S12"/>
+                            </layoutData>
+                        </FlexBox>                       
+                    </form:content>
+                </form:SimpleForm>
+
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <t:Table
+            class="sapUiMediumMarginBottom"
+                cellClick=".getRowData"
+                rowActionCount="1" 
+                id="snackTable"
+                selectionMode="None"
+                rows="{SnackModel>/}">
+                    <t:extension> 
+                        <OverflowToolbar id="_IDGenOverflowToolbar1" >
+                            <Title id="TableName" text="간식 목록"/>
+                            <ToolbarSpacer id="_IDGenToolbarSpacer1"/><!-- 우측에 요소를 정렬하고 싶을 때 사용 -->
+                            <Button id="_IDGenButton19"
+                                icon="sap-icon://excel-attachment"
+                                tooltip="Excel Download"
+                                press=".onDataExport" 
+                                type="Transparent"/>
+                            <Button 
+                                id="_IDGenButton7"
+                                text="재고 신청"
+                                press=".onCreateOrder"
+                                type="Transparent"/>
+                            <Button id="_IDGenButton8"
+                                icon="sap-icon://sort"
+                                tooltip="정렬"
+                                press=".onSort" 
+                                type="Transparent"/>
+                            
+                        </OverflowToolbar>
+                    </t:extension>
+
+                <t:columns>
+                    <t:Column  hAlign="Center">
+                        <Label  text="간식 카테고리"/>
+                        <t:template>
+                            <Text 
+                                text="{
+                                    path:'SnackModel>snack_category',
+                                    formatter:'.formatter.categoryFormat'
+                                }"/>
+
+                        </t:template>  
+                    </t:Column>
+
+                    <t:Column hAlign="Center">
+                        <Label text="간식 코드"/>
+                        <t:template>
+                            <Text text="{SnackModel>snack_code}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column hAlign="Center">
+                        <Label text="간식 이름"/>
+                        <t:template>
+                            <Text text="{SnackModel>snack_name}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column hAlign="Center">
+                        <Label text="간식 가격"/>
+                        <t:template>
+                            <Text text="{SnackModel>snack_price}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column hAlign="Center">
+                        <Label text="재고"/>
+                        <t:template>
+                            <Text text="{SnackModel>snack_stock}"/>
+                        </t:template>
+                    </t:Column>
+                
+                    <t:Column  hAlign="Center">
+                        <Label text="재고 상태"/>
+                        <t:template>
+                            <ObjectStatus 
+                                text="{
+                                    path:'SnackModel>snack_status',
+                                    formatter:'.formatter.quantStatus'
+                                    }"
+                                state = "{=${SnackModel>snack_status} === 'A' ? 'Success' : ${SnackModel>snack_status}  === 'B' ? 'None' : 'Error'}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column hAlign="Center">
+                        <Label text="재고 신청일"/>
+                        <t:template>
+                            <Text text="{SnackModel>snack_date}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column hAlign="Center">
+                        <Label text="선호도"/>
+                        <t:template>
+                            <Text text="{SnackModel>snack_prefer}"/>
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+                <t:rowActionTemplate>
+                    <t:RowAction >
+                        <t:items>
+                            <t:RowActionItem type="Navigation" press=".onNavToDetail"/>
+                        </t:items>
+                    </t:RowAction>
+                </t:rowActionTemplate>
+
+            </t:Table>
+    </f:content>
+    </f:DynamicPage>    
+    
+</mvc:View>

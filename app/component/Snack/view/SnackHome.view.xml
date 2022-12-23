@@ -1,0 +1,66 @@
+<mvc:View
+	controllerName="project5.controller.SnackHome"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:card="sap.f.cards"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+>
+<ScrollContainer  height="100%" width="100%" vertical="true" focusable="true">
+    <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+        <content class="panelbottomline">
+            <HBox  width="100%" height="3rem">
+                <Title id="_IDGenTitle1"  text="간식 요청 관리"/>
+                 
+            </HBox>
+            <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+                header="간식 요청 목록"
+                press=".toSnackList">
+                <TileContent >
+                    <ImageContent src="sap-icon://it-host"/>
+                </TileContent>
+            </GenericTile>
+            <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+                header="간식 요청 현황"
+                press=".toSnackChart">
+                <TileContent >
+                    <ImageContent  src="sap-icon://bar-chart"/>
+                </TileContent>
+            </GenericTile>
+            
+            <HBox  width="100%" height="3rem"/>
+            <HBox  width="100%">
+                <Title  text="간식 요청 Overview"/>
+            </HBox>
+            <f:Card class="sapUiSmallMargin" width="300px">
+                <f:header>
+                    <card:Header  title="간식 요청 적음 목록" subtitle="최신 3개의 처리 대기 데이터가 보입니다."/>
+                </f:header>
+                <f:content>
+                    <List id="_IDGenList1" showSeparators="None" items="{
+                        path : 'RecentRequestModel>/'}">
+                        <CustomListItem type="Active" press=".onNavToDetail" id="_IDGenCustomListItem1">
+                            <HBox alignItems="Center" justifyContent="SpaceBetween">
+                                <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
+                                    <Title  level="H3" text="{RecentRequestModel>snack_name}"/>
+                                    <Text 
+                                        text="{
+                                        path:'RecentRequestModel>snack_category',
+                                        formatter:'.formatter.categoryFormat'
+                                    }"/>
+                                </VBox>
+                                <ObjectStatus  class="sapUiTinyMargin sapUiSmallMarginEnd" text="{
+                                    path: 'RecentRequestModel>snack_status',
+                                    formatter : '.formatter.quantStatus'}"
+                                    state = "{=${RecentRequestModel>snack_status} === 'A' ? 'Success' : ${RecentRequestModel>snack_status}  === 'B' ? 'None' : 'Error'}"/>                            </HBox>
+                        </CustomListItem>
+                    </List>
+                </f:content>
+            </f:Card>
+        </content>
+    </Panel>
+
+</ScrollContainer>
+</mvc:View>

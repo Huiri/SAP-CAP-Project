@@ -1,0 +1,81 @@
+<mvc:View controllerName="project5.controller.CreateOrder"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+    <f:DynamicPage id="page"
+        headerExpanded="false"
+        showFooter="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <HBox>
+                        <Title text="재고 신청" class="sapUiTinyMarginTop"/>
+                    </HBox>
+                </f:heading>
+                <f:snappedContent>
+                    <form:SimpleForm layout="ResponsiveGridLayout">
+                        <form:content>
+                        <VBox id="snackData">
+                            <VBox height="4rem">
+                                <Label text="간식 카테고리" labelFor="snackCategory"/>
+                                <Select id="snackCategory" 
+                                width="100%" 
+                                required="true"
+                                forceSelection="false"
+                                items="{SelectOption>/createCategory}">
+                                    <core:Item key="{SelectOption>Category}" text="{SelectOption>Value}" />
+                    
+                                </Select>
+                                <layoutData>
+                                    <layout:GridData span="XL6 L6 M12 S12"/>
+                                </layoutData>
+                            </VBox>
+                            <!-- <VBox height="4rem">
+                                <layoutData>
+                                    <layout:GridData span="XL6 L6 M3 S12"/>
+                                </layoutData>
+                            </VBox> -->
+                            <VBox height="4rem">
+                                <Label text="간식 이름" labelFor="snackName"/>
+                                <Input id="snackName" required="true"/>
+                                <layoutData>
+                                    <layout:GridData span="XL6 L6 M12 S12"/>
+                                </layoutData>
+                            </VBox>
+                            <VBox height="4rem">
+                                <Label text="간식 수량" labelFor="snackQuantity"/>
+                                <Input id="snackQuantity" required="true" type="Number"/>
+                                <layoutData>
+                                    <layout:GridData span="XL6 L6 M12 S12"/>
+                                </layoutData>
+                            </VBox>
+                            <VBox height="4rem">
+                                <Label text="간식 가격" labelFor="snackPrice"/>
+                                <Input id="snackPrice" required="true" type="Number"/>
+                                <layoutData>
+                                    <layout:GridData span="XL6 L6 M12 S12"/>
+                                </layoutData>
+                            </VBox>
+                        </VBox >
+
+                        </form:content>
+                    </form:SimpleForm>
+
+                </f:snappedContent>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:footer>
+            <OverflowToolbar >
+                <ToolbarSpacer />
+                <Button type="Emphasized" text="생성" press=".onCreate"/>
+                <Button text="취소" press=".toBack"/>
+            </OverflowToolbar>
+        </f:footer>
+    
+    </f:DynamicPage>
+
+</mvc:View>

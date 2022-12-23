@@ -1,7 +1,7 @@
 {
   "_version": "1.42.0",
   "sap.app": {
-    "id": "project3",
+    "id": "project5",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -18,15 +18,6 @@
     "dataSources": {
       "requestService": {
         "uri": "/request/",
-        "type": "OData",
-        "settings": {
-          "annotations": [],
-          "localUri": "localService/metadata.xml",
-          "odataVersion": "4.0"
-        }
-      },
-      "companyService": {
-        "uri": "/company/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -54,7 +45,7 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.102.1",
       "libs": {
@@ -76,21 +67,16 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "project3.i18n.i18n"
+          "bundleName": "project5.i18n.i18n"
         }
       },
-      "Request" : {
-        "dataSource": "requestService",
+      "": {
+        "dataSource": "mainService2",
         "preload": true,
-        "settings": {
-          "operationMode" : "Server",
-          "earlyRequests" : true,
-          "synchronizationMode" : "None",
-          "autoExpandSelect" : true
-        }
+        "settings": {}
       },
-      "Vendor" : {
-        "dataSource": "companyService",
+      "Snack" : {
+        "dataSource": "snackService",
         "preload": true,
         "settings": {
           "operationMode" : "Server",
@@ -116,28 +102,12 @@
         "routerClass": "sap.f.routing.Router",
         "viewType": "XML",
         "async": true,
-        "viewPath": "project3.view",
+        "viewPath": "project5.view",
         "controlAggregation": "pages",
         "controlId": "app",
         "clearControlAggregation": false
       },
       "routes": [
-        {
-          "name": "GridCompany",
-          "pattern": "GridCompany",
-          "target": [
-            "GridCompany"
-          ],
-          "layout" :"OneColumn"
-        },
-        {
-          "name": "ResponsiveCompany",
-          "pattern": "ResponsiveCompany",
-          "target": [
-            "ResponsiveCompany"
-          ],
-          "layout" :"OneColumn"
-        },
         {
           "name": "Routeapp",
           "pattern": "Routeapp",
@@ -147,44 +117,53 @@
           "layout" :"OneColumn"
         },
         {
-          "name": "AddCompany",
-          "pattern": "AddCompany/{num}/{table}",
+          "name": "SnackList",
+          "pattern": "SnackList",
           "target": [
-            "AddCompany"
+            "SnackList"
           ],
           "layout" :"OneColumn"
         },
         {
-          "name": "GridCompanyDetail",
-          "pattern": "GridCompanyDetail/{num}/{table}",
-          "target": [
-            "GridCompany",
-            "CompanyDetail"
+          "name" : "CreateOrder",
+          "pattern": "CreateOrder",
+          "target" : [
+            "CreateOrder"
           ],
-          "layout" :"TwoColumnsMidExpanded"
+          "layout" :"OneColumn"
         },
         {
-          "name": "ResCompanyDetail",
-          "pattern": "ResCompanyDetail/{num}/{table}",
+          "name": "SnackDetail",
+          "pattern": "SnackDetail/{num}",
           "target": [
-            "ResponsiveCompany",
-            "CompanyDetail"
+            "SnackList",
+            "SnackDetail"
           ],
           "layout" :"TwoColumnsMidExpanded"
+
         },
         {
-          "name": "CompanyDetailexpand",
-          "pattern": "CompanyDetail/{num}/{table}/expand",
+          "name": "SnackDetailexpand",
+          "pattern": "SnackDetail/{num}/expand",
           "target": [
-            "CompanyDetail"
+            "SnackDetail"
           ],
           "layout" :"MidColumnFullScreen"
+
         },
         {
-          "name": "CompanyHome",
+          "name": "SnackHome",
           "pattern": "",
           "target": [
-            "CompanyHome"
+            "SnackHome"
+          ],
+          "layout" :"OneColumn"
+        },
+        {
+          "name": "SnackChart",
+          "pattern": "SnackChart",
+          "target": [
+            "SnackChart"
           ],
           "layout" :"OneColumn"
         }
@@ -192,24 +171,22 @@
         
       ],
       "targets": {
-        "GridCompany": {
+        "SnackList": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-          "viewId": "GridCompany",
-          "viewName": "GridCompany",
+          "viewId": "SnackList",
+          "viewName": "SnackList",
           "controlAggregation": "beginColumnPages"
-
-          
         }, 
-        "ResponsiveCompany": {
+        "CreateOrder" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-          "viewId": "ResponsiveCompany",
-          "viewName": "ResponsiveCompany",
+          "viewId": "CreateOrder",
+          "viewName": "CreateOrder",
           "controlAggregation": "beginColumnPages"
-        }, 
+        },
         "Targetapp": {
           "viewType": "XML",
           "transition": "slide",
@@ -218,34 +195,35 @@
           "viewName": "app",
           "controlAggregation": "beginColumnPages"
         },
-        "AddCompany": {
+        "SnackDetail" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-          "viewId": "AddCompany",
-          "viewName": "AddCompany",
-          "controlAggregation": "beginColumnPages"
-        },
-        "CompanyDetail" : {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": true,
-          "viewId": "CompanyDetail",
-          "viewName": "CompanyDetail",
+          "viewId": "SnackDetail",
+          "viewName": "SnackDetail",
           "controlAggregation": "midColumnPages"
         },
-        "CompanyHome" : {
+        "SnackHome" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-          "viewId": "Company_home",
-          "viewName": "Company_home",
+          "viewId": "SnackHome",
+          "viewName": "SnackHome",
           "controlAggregation": "beginColumnPages"
+        },
+        "SnackChart" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "SnackChart",
+          "viewName": "SnackChart",
+          "controlAggregation": "beginColumnPages"
+
         }
       }
     },
     "rootView": {
-      "viewName": "project3.view.App",
+      "viewName": "project5.view.App",
       "type": "XML",
       "async": true,
       "id": "App"

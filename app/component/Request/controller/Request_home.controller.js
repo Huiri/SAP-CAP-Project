@@ -31,7 +31,7 @@ sap.ui.define([
 
         },
         onRequest_list : function(){
-            this.getOwnerComponent().getRouter().navTo("Request", {status : " "});
+            this.getOwnerComponent().getRouter().navTo("Request", {status : "table"});
         },
         onRequest_state : function() {
             this.getOwnerComponent().getRouter().navTo("RequestChart");

@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+        id="SortDialog"
+        confirm=".onConfirmSortDialog"
+        title="물품 요청 정렬">
+         <sortItems>
+            <ViewSettingsItem text="간식 이름" key="snack_name" selected="true"/>
+            <ViewSettingsItem text="간식 카테고리" key="snack_category"/>
+            <ViewSettingsItem text="재고 상태" key="snack_status"/>
+            <ViewSettingsItem text="재고 신청일" key="snack_date"/>
+            <ViewSettingsItem text="선호도" key="snack_prefer"/>
+        </sortItems>
+        
+    </ViewSettingsDialog>
+</core:FragmentDefinition>

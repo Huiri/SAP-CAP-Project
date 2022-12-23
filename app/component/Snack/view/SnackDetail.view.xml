@@ -1,0 +1,149 @@
+<mvc:View 
+xmlns:mvc="sap.ui.core.mvc" 
+xmlns="sap.m" 
+xmlns:f="sap.f" 
+xmlns:layout="sap.ui.layout" 
+xmlns:form="sap.ui.layout.form" 
+controllerName="project5.controller.SnackDetail" 
+displayBlock="true" 
+height="100%" 
+busyIndicatorDelay="0">
+    <f:DynamicPage  headerExpanded="false" showFooter="true">
+        <f:title>
+            <f:DynamicPageTitle  >
+                <f:heading>
+                    <HBox >
+                        <Button press=".toBack" type="Back" tooltip="요청 목록 화면으로 돌아가기" />
+
+                        <Title text="간식 세부사항"/>
+                    </HBox>
+                </f:heading>
+                <f:navigationActions>
+                    <Button visible="{=!${layoutModel>/layout}}"
+                        icon="sap-icon://full-screen"
+                        type="Transparent" press=".onFull"/>
+                    <Button  visible="{layoutModel>/layout}"
+                        icon="sap-icon://exit-full-screen"
+                        type="Transparent" press=".onExitFull"/>
+                </f:navigationActions>
+            
+                <f:snappedContent>
+                    <form:SimpleForm layout="ResponsiveGridLayout">
+                        <form:content>
+                            <VBox id="snackData">
+
+                            <VBox height="4rem">
+                                <Label text="간식 카테고리" />
+                                <Text 
+                                    id="snackCategory"
+                                    text="{
+                                        path:'SnackModel>/snack_category',
+                                        formatter:'.formatter.categoryFormat'
+                                    }"/>                                
+                                <layoutData>
+                                    <layout:GridData span="XL6 L6 M12 S12" />
+                                </layoutData>
+                            </VBox>
+
+                            <VBox height="4rem" >
+                                <Label text="간식 이름" labelFor="InputsnackName"/>
+                                <Text id="snackName" 
+                                    text="{SnackModel>/snack_name}" 
+                                    visible="{=!${editModel>/editable}}"/>
+                                <Input id="InputsnackName" 
+                                visible="{=${editModel>/editable}}"
+                                required="true"/>
+
+                                <layoutData>
+                                    <layout:GridData span="XL6 L6 M12 S12" />
+                                </layoutData>
+                            </VBox>
+                            <VBox height="4rem">
+                                <Label text="간식 가격" labelFor="InputsnackPrice" />
+                                <Text id="snackPrice" 
+                                    text="{SnackModel>/snack_price}"
+                                    visible="{=!${editModel>/editable}}"/>
+                                <Input id="InputsnackPrice" 
+                                type="Number"
+                                visible="{=${editModel>/editable}}"
+                                required="true"/>
+
+                                <layoutData>
+                                    <layout:GridData span="XL12 L12 M12 S12" />
+                                </layoutData>
+                            </VBox>
+                            <VBox height="4rem">
+                                <Label text="재고 수량"
+                                labelFor="InputsnackQuant" />
+                                <Text id="snackQuant" 
+                                text="{SnackModel>/snack_stock}" 
+                                visible="{=!${editModel>/editable}}"/>
+                                <Input id="InputsnackQuant" 
+                                visible="{=${editModel>/editable}}"
+                                type="Number" 
+                                required="true"/>
+
+                                <layoutData>
+                                    <layout:GridData span="XL6 L6 M12 S12" />
+                                </layoutData>
+                            </VBox>
+                            <VBox height="4rem" >
+                                <Label  text="재고 상태" />
+
+                                <ObjectStatus
+                                    id="snackStatus"
+                                    text="{
+                                    path:'SnackModel>/snack_status',
+                                    formatter:'.formatter.quantStatus'
+                                    }"
+                                    state="{=${SnackModel>/snack_status} === 'A' ? 'Success' : ${SnackModel>/snack_status}  === 'B' ? 'None' : 'Error'}"
+                                />
+
+                                <layoutData>
+                                    <layout:GridData span="XL6 L6 M12 S12" />
+                                </layoutData>
+                            </VBox>
+                            <VBox height="4rem">
+                                <Label text="마지막 신청일" />
+                                <Text id="snackUpdateDate" 
+                                    text="{SnackModel>/snack_date}" 
+                                    visible="{=!${editModel>/editable}}"/>
+                                <DatePicker
+                                    id="InputsnackUpdateDate" 
+                                    visible="{=${editModel>/editable}}"
+                                    displayFormat="yyyy-MM-dd"
+                                    valueFormat="yyyy-MM-dd"/>
+
+                                <layoutData>
+                                    <layout:GridData span="XL6 L6 M12 S12" />
+                                </layoutData>
+                            </VBox>
+                            <VBox height="4rem">
+                                <Label text="선호도" labelFor="InputsnackPrefer"/>
+                                <Text id="snackPrefer" text="{SnackModel>/snack_prefer}" 
+                                    visible="{=!${editModel>/editable}}"/>
+                                <Input id="InputsnackPrefer"
+                                type="Number" 
+                                visible="{=${editModel>/editable}}"/>
+
+                                <layoutData>
+                                    <layout:GridData span="XL6 L6 M12 S12" />
+                                </layoutData>
+                            </VBox>
+                        </VBox>
+
+                        </form:content>
+                    </form:SimpleForm>
+                </f:snappedContent>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button press=".onEdit" type="Transparent" text="편집" visible="{=!${editModel>/editable}}"/>
+                <Button press=".onEditConfirm" type="Emphasized" text="저장" visible="{=${editModel>/editable}}"/>
+                <Button press=".onEditReject" type="Transparent" text="취소" visible="{=${editModel>/editable}}"/>
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>
