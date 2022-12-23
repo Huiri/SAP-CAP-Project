@@ -18,7 +18,7 @@ sap.ui.define([
     Spreadsheet,
     exportLibrary) {//사용할 모듈의 별칭 선언(순서 맞춰 주어야 오류 발생 X)
         "use strict";
-        let totalNumber;
+        let totalNumber, SelectedState;
         const EdmType = exportLibrary.EdmType;
 
         return Controller.extend("project2.controller.Request", { // 소괄호 안의 경로 파일을 컨트롤러로 사용하겠다는 선언
@@ -28,9 +28,14 @@ sap.ui.define([
                 this.getOwnerComponent().getRouter().getRoute("Request").attachPatternMatched(this.onMyRoutePatternMatched, this);
                 this.getOwnerComponent().getRouter().getRoute("RequestDetail").attachPatternMatched(this.onMyRoutePatternMatched, this);
             },
-            onMyRoutePatternMatched :async function(){
-                this.onDataView();
-                // this.onReset();
+            onMyRoutePatternMatched :async function(oEvent){
+                SelectedState = oEvent.getParameter("arguments").status;
+                if(SelectedState=='%20'){
+                    SelectedState=''
+                }
+                await this.onDataView();
+                this.byId("ReqStatus").setSelectedKey(SelectedState);
+                this.onSearch();
             },
             onCheckExecute : function(){
                 let ischecked = this.byId("checkAll").getSelected();
@@ -60,7 +65,7 @@ sap.ui.define([
                     type : "get",
                     url : "/request/Request"
                 });
-                 this.getView().byId("ui_table").setBusy(false);
+                this.getView().byId("ui_table").setBusy(false);
 
                 let RequestModel = new JSONModel(Request.value);
                 this.getView().setModel(RequestModel, "RequestModel");
@@ -85,13 +90,16 @@ sap.ui.define([
                 }
                 for(let i = 0; i < oList.length; i++){
                     if(oList[i].request_state === 'A'){
-                        oList[i].request_state2 = "승인";
+                        oList[i].request_state = "승인";
+                        // oList[i].request_state2 = "승인";
                     }
                     if(oList[i].request_state === 'B'){
-                        oList[i].request_state2 = "처리 대기";
+                        oList[i].request_state = "처리 대기";
+                        // oList[i].request_state2 = "처리 대기";
                     }
                     if(oList[i].request_state === 'C'){
-                        oList[i].request_state2 = "반려";
+                        oList[i].request_state = "반려";
+                        // oList[i].request_state2 = "반려";
                     }
                 }
 
@@ -153,7 +161,7 @@ sap.ui.define([
             onNavToDetail : function(oEvent) {
                 let SelectedNum = oEvent.getParameters().row.mAggregations.cells[1].mProperties.text;
                 console.log(SelectedNum);
-                this.getOwnerComponent().getRouter().navTo("RequestDetail", {num : SelectedNum,table:"grid", where:" "});
+                this.getOwnerComponent().getRouter().navTo("RequestDetail", {num : SelectedNum,table:"grid", where: "request"});
                 //, {변수명 : manifest route에 작성한 변수명과 일치시켜야 함}
 
             },
@@ -193,6 +201,7 @@ sap.ui.define([
                 let oTable = this.byId("ui_table").getBinding("rows"); //ui_table이라는 id값을 가진 테이블에 존재하는 데이터를 oData에 할당
                 oTable.filter(aFilter); // 테이블에 존재하는 데이터를 설정된 필터 조건으로 필터링
 
+                console.log("asdf");
             },
 
             onClearField : function (){

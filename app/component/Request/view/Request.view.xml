@@ -145,6 +145,7 @@
         <f:content>
             <!-- table 선언 -->
             <t:Table
+            class="sapUiMediumMarginBottom"
                 cellClick=".getRowData"
                 rowActionCount="1" 
                 id="ui_table"
@@ -216,7 +217,7 @@
 
                 <!-- col 여러개 생성할 거라서 columns 태그를 상위에 위치시킴 -->
                 <t:columns>
-                    <t:Column id="_IDGenColumn0" hAlign="Center" width="4rem">
+                    <t:Column id="_IDGenColumn0" width="4rem">
                         <!-- <Label><Text> sap.m에 존재하기 때문에 namespace:Label || Text 선언 X -->
                         <CheckBox id="checkAll" select=".onCheckExecute" />
                         <!-- {checkBoxModel>/show} -->
@@ -295,7 +296,7 @@
                 <t:rowActionTemplate>
                     <t:RowAction id="_IDGenRowAction1" >
                         <t:items>
-                            <t:RowActionItem id="_IDGenRowActionItem1"  type="Navigation" press="onNavToDetail"></t:RowActionItem>
+                            <t:RowActionItem id="_IDGenRowActionItem1"  type="Navigation" press=".onNavToDetail"></t:RowActionItem>
                         </t:items>
                     </t:RowAction>
                 </t:rowActionTemplate>

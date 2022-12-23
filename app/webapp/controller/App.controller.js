@@ -9,7 +9,7 @@ sap.ui.define(
         onInit() {
         },
         toRequest : function (){
-          this.getOwnerComponent().getRouter().navTo("Request");
+          this.getOwnerComponent().getRouter().navTo("Request", {status : null});
         },
         toCompany : function (){
           this.getOwnerComponent().getRouter().navTo("GridCompany");

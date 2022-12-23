@@ -6,24 +6,24 @@
         <content>
             <form:SimpleForm id="OrderRejectForm" editable="true" layout="ResponsiveGridLayout">
                 <form:content>
-                    <Label text="반려 사유">
+                    <Label id="_IDGenLabel1" text="반려 사유">
                         <layoutData>
-                            <l:GridData span="XL2 L2 M2 S12" />
+                            <l:GridData id="_IDGenGridData1" span="XL2 L2 M2 S12" />
                         </layoutData>
                     </Label>
                     <TextArea id="RejectReason" height="10rem">
                         <layoutData>
-                            <l:GridData span="XL10 L10 M10 S12" linebreak="true" />
+                            <l:GridData id="_IDGenGridData2" span="XL10 L10 M10 S12" linebreak="true" />
                         </layoutData>
                     </TextArea>
                 </form:content>
             </form:SimpleForm>
         </content>
         <beginButton>
-            <Button text="확인" press=".onInputRejectReason" />
+            <Button id="_IDGenButton1" text="확인" press=".onInputRejectReason" />
         </beginButton>
         <endButton>
-            <Button text="취소" press=".onCancelRejectReason" />
+            <Button id="_IDGenButton2" text="취소" press=".onCancelRejectReason" />
         </endButton>
     </Dialog>
 </core:FragmentDefinition>

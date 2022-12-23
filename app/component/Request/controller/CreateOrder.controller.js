@@ -98,7 +98,7 @@ sap.ui.define([
             //이전 페이지로 돌아가고 싶을 때 사용(정확히는 Request 페이지로 돌아가고 싶을 때 사용)
             onBack : function(){
                 this.onReset();
-                this.getOwnerComponent().getRouter().navTo("Request");
+                this.getOwnerComponent().getRouter().navTo("Request", {status : " "});
                 //getOwnerComponent : manifest||Component에 있는 정보 불러올 때 사용하는 메소드
                 //getRouter : Router의 정보를 가져오고자 할 때 사용하는 메소드
                 //navTo : navigation To의 약자, routes의 name을 통해 이동

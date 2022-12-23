@@ -114,7 +114,7 @@
         },
         {
           "name": "Request",
-          "pattern": "Request",
+          "pattern": "Request/{status}",
           "target": [
             "Request"
           ],

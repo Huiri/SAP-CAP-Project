@@ -31,7 +31,7 @@ sap.ui.define([
 
         },
         onRequest_list : function(){
-            this.getOwnerComponent().getRouter().navTo("Request");
+            this.getOwnerComponent().getRouter().navTo("Request", {status : " "});
         },
         onRequest_state : function() {
             this.getOwnerComponent().getRouter().navTo("RequestChart");
@@ -43,6 +43,10 @@ sap.ui.define([
             let data_path = oEvent.getSource().oBindingContexts.RecentRequestModel.sPath;
             let SelectedKey = this.getView().getModel("RecentRequestModel").getProperty(data_path).request_number;
             this.getOwnerComponent().getRouter().navTo("RequestDetailexpand", {num : SelectedKey, where : "home"});
+        },
+        onStateClick : function(sButtonText, sVal){
+            this.getOwnerComponent().getRouter().navTo("Request", {status: sVal});
+            console.log(sVal);
         }
  	});
 });

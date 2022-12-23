@@ -46,11 +46,11 @@
                     <card:Header id="_IDGenHeader2" title="이번 달 물품 요청 처리 현황" iconSrc="sap-icon://bar-chart" />
                 </f:header>
                 <f:content>
-                    <micro:ColumnMicroChart id="_IDGenColumnMicroChart1" size="L" class="sapUiSmallMargin">
+                    <micro:ColumnMicroChart id="_IDGenColumnMicroChart1" allowColumnLabels="true" size="L" class="sapUiSmallMargin">
                         <micro:columns>
-                            <micro:ColumnMicroChartData id="_IDGenColumnMicroChartData1" label="승인" value="{state>/approve}" color="Good"/>
-                            <micro:ColumnMicroChartData id="_IDGenColumnMicroChartData5" label="처리 대기" value="{state>/wait}" color="Neutral"/>
-                            <micro:ColumnMicroChartData id="_IDGenColumnMicroChartData6" label="반려" value="{state>/reject}" color="Error"/>
+                            <micro:ColumnMicroChartData id="_IDGenColumnMicroChartData1" label="승인" value="{state>/approve}" displayValue = "{state>/approvepercent}" color="Good"/>
+                            <micro:ColumnMicroChartData id="_IDGenColumnMicroChartData5" label="처리 대기" value="{state>/wait}" displayValue = "{state>/waitpercent}" color="Neutral"/>
+                            <micro:ColumnMicroChartData id="_IDGenColumnMicroChartData6" label="반려" value="{state>/reject}" displayValue = "{state>/rejectpercent}" color="Error"/>
                         </micro:columns>
                     </micro:ColumnMicroChart>
                 </f:content>

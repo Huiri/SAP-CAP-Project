@@ -72,7 +72,7 @@
                 <f:content>
                     <List id="_IDGenList2" showSeparators="None" items="{
                         path : 'StatusRequestModel>/'}">
-                        <CustomListItem id="_IDGenCustomListItem2">
+                        <CustomListItem id="_IDGenCustomListItem2" press=".onStateClick($event, ${StatusRequestModel>request_state})" type="Active">
                             <HBox id="_IDGenHBox5" alignItems="Center" justifyContent="SpaceBetween">
                                 <VBox id="_IDGenVBox2" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
                                     <ObjectStatus id="_IDGenObjectStatus2" class="sapUiTinyMargin sapUiSmallMarginEnd" text="{
@@ -88,7 +88,6 @@
                     </List>
                 </f:content>
             </f:Card>
-
         </content>
     </Panel>
 

@@ -1,8 +1,8 @@
 sap.ui.define(
     [
         "sap/ui/core/mvc/Controller",
-	"sap/ui/model/json/JSONModel",
-  "../model/formatter"
+	      "sap/ui/model/json/JSONModel",
+        "../model/formatter"
     ],
     function(Controller, JSONModel, formatter) {
       "use strict";
@@ -77,8 +77,8 @@ sap.ui.define(
             console.log(FromWhere);
             if(FromWhere === "home"){
               this.getOwnerComponent().getRouter().navTo("RequestHome");
-            } else if(FromWhere === "detail" || FromWhere === " ") {
-              this.getOwnerComponent().getRouter().navTo("Request");
+            } else if(FromWhere === "detail" || FromWhere === "request") {
+              this.getOwnerComponent().getRouter().navTo("Request", {status :" "});
             }
         },
         onApprove : async function(){
